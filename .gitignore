@@ -1,4 +1,11 @@
+# Common Files
 *.log
 *.pot
 *.pyc
 local_settings.py
+
+# Virtualenv
+venv
+
+# Db
+*.sqlite
