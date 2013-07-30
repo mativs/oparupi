@@ -41,5 +41,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'south',
     'oparupi.posts',
+    'djcompass',
 )
 
