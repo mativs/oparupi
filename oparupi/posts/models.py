@@ -7,7 +7,7 @@ class Post(models.Model):
         verbose_name_plural = 'Posts'
 
     def __unicode__(self):
-        return title
+        return self.title
 
     title = models.CharField(max_length=256)
     body = models.TextField()
