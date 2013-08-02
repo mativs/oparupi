@@ -2,7 +2,16 @@ from django.db import models
 
 from taggit.managers import TaggableManager
 
-# Create your models here.
+class Section(models.Model):
+    class Meta:
+        verbose_name = 'Section'
+        verbose_name_plural = 'Sections'
+
+    def __unicode__(self):
+        return self.title
+    
+    title = models.CharField(max_length=50)
+
 class Post(models.Model):
     class Meta:
         verbose_name = 'Post'
@@ -13,8 +22,8 @@ class Post(models.Model):
 
     title = models.CharField(max_length=256)
     body = models.TextField()
+    section = models.ForeignKey(Section, related_name='posts')
+    tags = TaggableManager()
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
-    tags = TaggableManager()
