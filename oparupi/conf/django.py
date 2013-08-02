@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'south',
     'djcompass',
     'markdown_deux',
+    'taggit',
     'oparupi.posts',
 )
 
