@@ -53,7 +53,7 @@ $default-float: left;
 
 // $body-bg: #fff;
 // $body-font-color: #222;
-// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-family: 'Open Sans', sans-serif;
 // $body-font-weight: normal;
 // $body-font-style: normal;
 
@@ -1265,7 +1265,7 @@ $topbar-bg: #282828;
 // $topbar-link-color-hover: #fff;
 // $topbar-link-color-active: #fff;
 $topbar-link-weight: 600  ;
-$topbar-link-font-size: emCalc(17);
+$topbar-link-font-size: emCalc(15);
 // $topbar-link-hover-lightness: -30%; // Darken by 30%
 // $topbar-link-bg-hover: darken($topbar-bg, 3%);
 // $topbar-link-bg-active: darken($topbar-bg, 3%);

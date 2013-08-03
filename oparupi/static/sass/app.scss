@@ -54,10 +54,9 @@
 // @import "foundation/components/tooltips";
 // @import "foundation/components/dropdown";
 
-
+// Center top nav elements -> https://github.com/zurb/foundation/issues/2489
 .top-bar:not(.expanded) {
   section.top-bar-section {
-      // Center top nav elements -> https://github.com/zurb/foundation/issues/2489
       float: left;
       left: 50% !important;
       position: relative;
@@ -65,8 +64,14 @@
         position: relative;
         right: 50%;
       }
-      a {
-        text-transform: capitalize;
-      }
+  }
+}
+
+// Capitalize top bar
+.top-bar {
+  section.top-bar-section {
+    a {
+      text-transform: capitalize;
+    }
   }
 }

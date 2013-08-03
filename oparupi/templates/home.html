@@ -10,6 +10,7 @@
 
   
   <link rel="stylesheet" href="{{ STATIC_URL }}css/app.css">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600,700" rel="stylesheet">
   <script src="{{ STATIC_URL }}js/vendor/custom.modernizr.js"></script>
 
 </head>
@@ -28,8 +29,8 @@
       <!-- Left Nav Section -->
       <ul class="left">
         {% for section in sections %}
-        <li><a>{{section.title}}</a></li>
-        {% endfor %}  
+          <li><a>{{section.title}}</a></li>
+        {% endfor %}
       </ul>
 
     </section>

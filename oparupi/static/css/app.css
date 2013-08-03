@@ -160,7 +160,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 html, body { font-size: 100%; }
 
 /* line 272, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_global.scss */
-body { background: white; color: #222222; padding: 0; margin: 0; font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; font-weight: normal; font-style: normal; line-height: 1; position: relative; cursor: default; }
+body { background: white; color: #222222; padding: 0; margin: 0; font-family: "Open Sans", sans-serif; font-weight: normal; font-style: normal; line-height: 1; position: relative; cursor: default; }
 
 /* line 285, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_global.scss */
 a:hover { cursor: pointer; }
@@ -1687,9 +1687,9 @@ label.error { color: #c60f13; }
 /* line 227, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
 .top-bar-section .divider, .top-bar-section [role="separator"] { border-bottom: solid 1px #424242; border-top: solid 1px #0e0e0e; clear: both; height: 1px; width: 100%; }
 /* line 236, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
-.top-bar-section ul li > a { display: block; width: 100%; color: white; padding: 12px 0 12px 0; padding-left: 15px; font-size: 1.0625em; font-weight: 600; background: #222222; }
+.top-bar-section ul li > a { display: block; width: 100%; color: white; padding: 12px 0 12px 0; padding-left: 15px; font-size: 0.9375em; font-weight: 600; background: #222222; }
 /* line 246, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
-.top-bar-section ul li > a.button { background: #2ba6cb; font-size: 1.0625em; }
+.top-bar-section ul li > a.button { background: #2ba6cb; font-size: 0.9375em; }
 /* line 249, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
 .top-bar-section ul li > a.button.hover { background: #2284a1; }
 /* line 253, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
@@ -2509,7 +2509,8 @@ a.th { display: inline-block; }
 
 /* line 59, ../sass/app.scss */
 .top-bar:not(.expanded) section.top-bar-section { float: left; left: 50% !important; position: relative; }
-/* line 64, ../sass/app.scss */
+/* line 63, ../sass/app.scss */
 .top-bar:not(.expanded) section.top-bar-section ul.left { position: relative; right: 50%; }
-/* line 68, ../sass/app.scss */
-.top-bar:not(.expanded) section.top-bar-section a { text-transform: capitalize; }
+
+/* line 73, ../sass/app.scss */
+.top-bar section.top-bar-section a { text-transform: capitalize; }
