@@ -23,7 +23,7 @@ class Post(models.Model):
     title = models.CharField(max_length=256)
     body = models.TextField()
     section = models.ForeignKey(Section, related_name='posts')
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
