@@ -795,8 +795,8 @@ $body-font-family: 'Open Sans', sans-serif;
 // Magellan Variables
 //
 
-// $magellan-bg: #fff;
-// $magellan-padding: 10px;
+$magellan-bg: #fff;
+$magellan-padding: 0px;
 
 //
 // Orbit Settings
@@ -1239,7 +1239,7 @@ $topbar-bg: #282828;
 // Height and margin
 
 // $topbar-height: 45px;
-// $topbar-margin-bottom: emCalc(30);
+$topbar-margin-bottom: 0;
 
 // Control Input height for top bar
 

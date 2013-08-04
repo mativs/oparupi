@@ -1636,13 +1636,13 @@ label.error { color: #c60f13; }
 /* line 67, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
 .contain-to-grid { width: 100%; background: #282828; }
 /* line 71, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
-.contain-to-grid .top-bar { margin-bottom: 1.875em; }
+.contain-to-grid .top-bar { margin-bottom: 0; }
 
 /* line 75, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
 .fixed { width: 100%; left: 0; position: fixed; top: 0; z-index: 99; }
 
 /* line 83, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
-.top-bar { overflow: hidden; height: 45px; line-height: 45px; position: relative; background: #282828; margin-bottom: 1.875em; }
+.top-bar { overflow: hidden; height: 45px; line-height: 45px; position: relative; background: #282828; margin-bottom: 0; }
 /* line 92, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
 .top-bar ul { margin-bottom: 0; list-style: none; }
 /* line 97, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
@@ -1756,7 +1756,7 @@ label.error { color: #c60f13; }
   /* line 382, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
   .top-bar.expanded { background: #282828; }
   /* line 385, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
-  .contain-to-grid .top-bar { max-width: 62.5em; margin: 0 auto; margin-bottom: 1.875em; }
+  .contain-to-grid .top-bar { max-width: 62.5em; margin: 0 auto; margin-bottom: 0; }
   /* line 391, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
   .top-bar-section { -webkit-transition: none 0 0; -moz-transition: none 0 0; transition: none 0 0; left: 0 !important; }
   /* line 395, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_top-bar.scss */
@@ -2410,7 +2410,7 @@ ul.pagination li { float: left; display: block; }
     /* line 259, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_switch.scss */
     to { position: relative; } } }
 /* line 11, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_magellan.scss */
-[data-magellan-expedition] { background: white; z-index: 50; min-width: 100%; padding: 10px; }
+[data-magellan-expedition] { background: white; z-index: 50; min-width: 100%; padding: 0px; }
 /* line 17, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_magellan.scss */
 [data-magellan-expedition] .sub-nav { margin-bottom: 0; }
 /* line 19, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_magellan.scss */

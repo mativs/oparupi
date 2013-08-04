@@ -14,29 +14,50 @@
   <script src="{{ STATIC_URL }}js/vendor/custom.modernizr.js"></script>
 
 </head>
-<body>
-  <nav class="top-bar">
-    <ul class="title-area">
-      <!-- Title Area -->
-      <li class="name">
-        <h1><a href="#"><!-- Leave this empty --></a></h1>
-      </li>
-      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-    </ul>
-
-    <section class="top-bar-section">
-      <!-- Left Nav Section -->
-      <ul class="left">
-        <li><a href="/">Opárupi</a></li>
-        {% for section in sections %}
-          <li><a>{{section.title}}</a></li>
-        {% endfor %}
+<body id="home">
+  <div class="fixed">
+    <nav class="top-bar" >
+      <ul class="title-area">
+        <!-- Title Area -->
+        <li class="name">
+          <h1><a href="#"><!-- Leave this empty --></a></h1>
+        </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
 
-    </section>
-  </nav>
+      <section class="top-bar-section">
+        <!-- Left Nav Section -->
+        <ul class="left" >
+          <li><a href="#home">Opárupi</a></li>
+          {% for section in sections %}
+            <li><a href="#{{section.title|slugify}}">{{section.title}}</a></li>
+          {% endfor %}
+        </ul>
 
+      </section>
+    </nav>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <h2>Oparupi</h2>
+    </div>
+  </div>
+
+  {% for section in sections %}
+    <div id="{{section.title|slugify}}" class="row">
+      <div class="large-12 columns">
+        <h2>{{section.title}}</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<p>
+      </div>
+    </div>
+  {% endfor %}
 
   <div class="row">
     <div class="large-12 columns">
@@ -144,5 +165,6 @@
   <script>
     $(document).foundation();
   </script>
+  <script src="{{STATIC_URL}}js/oparupi.js"></script>
 </body>
 </html>
