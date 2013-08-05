@@ -54,24 +54,56 @@
 // @import "foundation/components/tooltips";
 // @import "foundation/components/dropdown";
 
-// Center top nav elements -> https://github.com/zurb/foundation/issues/2489
-.top-bar:not(.expanded) {
-  section.top-bar-section {
-      float: left;
-      left: 50% !important;
-      position: relative;
-      ul.left {
-        position: relative;
-        right: 50%;
+// Page border
+body {
+  border: 10px solid #ededed;
+}
+
+// Header CSS
+header {
+  position: relative;
+  width: 80%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 70px 0 20px;
+  text-align: center;
+  .avatar {
+    display: inline-block;
+    img {
+      width:70%;
+    }
+    h1 {
+      margin-bottom: 0px;
+    }
+  }
+  .description {
+    margin-top: 66px;
+    padding: 0 20%;
+  }
+  nav ul {
+    position: relative;
+    list-style: none;
+    li {
+      margin: 20px 8px 0;
+      display: inline-block;
+      a {
+        background: #ffffff;
+        color: #15B592;
+        display: block;
+        padding: 6px 12px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
       }
+    }
   }
 }
 
-// Capitalize top bar
-.top-bar {
-  section.top-bar-section {
-    a {
-      text-transform: capitalize;
-    }
-  }
+h1 {
+  margin-top: 30px;
+  letter-spacing: 4px;
+  font-size: 38px;
+  text-transform: uppercase;
+  line-height: 1;
 }
