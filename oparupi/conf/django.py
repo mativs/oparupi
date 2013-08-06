@@ -43,6 +43,13 @@ INSTALLED_APPS = (
     'djcompass',
     'markdown_deux',
     'taggit',
+    'sorl.thumbnail',
     'oparupi.posts',
 )
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'oparupi_cache',
+    }
+}

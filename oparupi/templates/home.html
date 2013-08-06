@@ -1,4 +1,5 @@
 {% load markdown_deux_tags %}
+{% load thumbnail %}
 <!DOCTYPE html>
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -39,12 +40,18 @@
 
   <div class="row">
   {% for section in sections%}
+  {% with section.latest as post %}
       <div class="small-4 columns">
         <div class="">
-          <h4>{{ section.latest.title }}</h4>
-          <p>{{ section.latest.body|markdown:"trusted"|truncatewords_html:40 }}</p>
+
+          {% if post.photo %}{% thumbnail post.photo "500x150" crop="center" as im %}
+            <img src="{{im.url}}">
+          {% endthumbnail %}{% endif %}
+          <h4>{{ post.title }}</h4>
+          <p>{{ post.body|markdown:"trusted"|truncatewords_html:40 }}</p>
         </div>
       </div>
+  {% endwith %}
   {% endfor %}
   </div>
 

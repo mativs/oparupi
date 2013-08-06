@@ -1,4 +1,5 @@
 from django.db import models
+from sorl.thumbnail import ImageField
 
 from taggit.managers import TaggableManager
 
@@ -26,6 +27,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=256)
     body = models.TextField()
+    photo = ImageField(upload_to='photos', blank=True, null=True)
     section = models.ForeignKey(Section, related_name='posts')
     tags = TaggableManager(blank=True)
 

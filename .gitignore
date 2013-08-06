@@ -12,3 +12,6 @@ venv
 
 # Ruby
 *.sass-cache
+
+# Media files
+media
