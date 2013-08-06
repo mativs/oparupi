@@ -42,11 +42,13 @@
   {% for section in sections%}
   {% with section.latest as post %}
       <div class="small-4 columns">
-        <div class="">
 
-          {% if post.photo %}{% thumbnail post.photo "500x150" crop="center" as im %}
+          {% if post.photo %}{% thumbnail post.photo "500" crop="center" as im %}
+          <div class="panel">
             <img src="{{im.url}}">
+          </div>
           {% endthumbnail %}{% endif %}
+        <div class="panel">
           <h4>{{ post.title }}</h4>
           <p>{{ post.body|markdown:"trusted"|truncatewords_html:40 }}</p>
         </div>

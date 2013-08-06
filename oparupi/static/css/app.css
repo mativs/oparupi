@@ -2246,7 +2246,7 @@ ul.pagination li { float: left; display: block; }
 
 /* Panels */
 /* line 66, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_panels.scss */
-.panel { border-style: solid; border-width: 1px; border-color: #d9d9d9; margin-bottom: 1.25em; padding: 1.25em; background: #f2f2f2; }
+.panel { border-style: solid; border-width: 1px; border-color: #e6e6e6; margin-bottom: 1.25em; padding: 1.25em; background: white; }
 /* line 44, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_panels.scss */
 .panel > :first-child { margin-top: 0; }
 /* line 45, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_panels.scss */
