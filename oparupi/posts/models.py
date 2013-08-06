@@ -9,6 +9,10 @@ class Section(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def latest(self):
+        return self.posts.latest('updated')
+
     
     title = models.CharField(max_length=50)
 

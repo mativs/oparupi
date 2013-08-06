@@ -6,5 +6,6 @@ from oparupi.posts.models import Post, Section
 def home(request, template='home.html', context={}):
   context['sections'] = Section.objects.all()
   context['post'] = Post.objects.latest('created')
+  context['posts'] = Post.objects.all()
   return render(request, template, context)
 
