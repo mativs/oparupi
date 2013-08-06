@@ -39,9 +39,8 @@
   </header>
 
   <div class="row">
-  {% for section in sections%}
-  {% with section.latest as post %}
-      <div class="small-4 columns">
+  {% for post in posts%}
+      <div class="small-4 columns post">
 
           {% if post.photo %}{% thumbnail post.photo "500" crop="center" as im %}
           <div class="panel">
@@ -50,10 +49,12 @@
           {% endthumbnail %}{% endif %}
         <div class="panel">
           <h4>{{ post.title }}</h4>
-          <p>{{ post.body|markdown:"trusted"|truncatewords_html:40 }}</p>
+          <p>{{ post.body|markdown:"trusted"|truncatewords_html:30 }}</p>
+          {% for tag in post.tags.all %}
+            <small>{{tag}}</small>
+          {% endfor %}
         </div>
       </div>
-  {% endwith %}
   {% endfor %}
   </div>
 
