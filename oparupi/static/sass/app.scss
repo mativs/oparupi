@@ -98,6 +98,17 @@ body {
           transition-duration: 0s;
 }
 
+/**** Isotope filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
 // Header CSS
 header {
   position: relative;
@@ -119,21 +130,27 @@ header {
     margin-top: 66px;
     padding: 0 20%;
   }
-  nav ul {
-    position: relative;
-    list-style: none;
-    li {
-      margin: 20px 8px 0;
-      display: inline-block;
-      a {
-        background: #ffffff;
-        color: #15B592;
-        display: block;
-        padding: 6px 12px;
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: 600;
+  nav {
+    ul {
+      position: relative;
+      list-style: none;
+      li {
+        margin: 20px 8px 0;
+        display: inline-block;
+        a {
+          background: #ffffff;
+          color: #15B592;
+          display: block;
+          padding: 6px 12px;
+          font-size: 11px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-weight: 600;
+        }
+        a.selected {
+          color: #ffffff;
+          background: #15B592;
+        }
       }
     }
   }

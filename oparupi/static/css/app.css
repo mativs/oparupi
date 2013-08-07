@@ -2523,25 +2523,34 @@ body { border: 10px solid #ededed; }
 /* line 93, ../sass/app.scss */
 .isotope.no-transition, .isotope.no-transition .isotope-item, .isotope .isotope-item.no-transition { -webkit-transition-duration: 0s; -moz-transition-duration: 0s; -ms-transition-duration: 0s; -o-transition-duration: 0s; transition-duration: 0s; }
 
-/* line 102, ../sass/app.scss */
-header { position: relative; width: 80%; max-width: 1080px; margin: 0 auto; padding: 70px 0 20px; text-align: center; }
-/* line 109, ../sass/app.scss */
-header .avatar { display: inline-block; }
-/* line 111, ../sass/app.scss */
-header .avatar img { width: 70%; }
-/* line 114, ../sass/app.scss */
-header .avatar h1 { margin-bottom: 0px; }
-/* line 118, ../sass/app.scss */
-header .description { margin-top: 66px; padding: 0 20%; }
-/* line 122, ../sass/app.scss */
-header nav ul { position: relative; list-style: none; }
-/* line 125, ../sass/app.scss */
-header nav ul li { margin: 20px 8px 0; display: inline-block; }
-/* line 128, ../sass/app.scss */
-header nav ul li a { background: #ffffff; color: #15B592; display: block; padding: 6px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+/**** Isotope filtering ****/
+/* line 103, ../sass/app.scss */
+.isotope-item { z-index: 2; }
 
-/* line 142, ../sass/app.scss */
+/* line 107, ../sass/app.scss */
+.isotope-hidden.isotope-item { pointer-events: none; z-index: 1; }
+
+/* line 113, ../sass/app.scss */
+header { position: relative; width: 80%; max-width: 1080px; margin: 0 auto; padding: 70px 0 20px; text-align: center; }
+/* line 120, ../sass/app.scss */
+header .avatar { display: inline-block; }
+/* line 122, ../sass/app.scss */
+header .avatar img { width: 70%; }
+/* line 125, ../sass/app.scss */
+header .avatar h1 { margin-bottom: 0px; }
+/* line 129, ../sass/app.scss */
+header .description { margin-top: 66px; padding: 0 20%; }
+/* line 134, ../sass/app.scss */
+header nav ul { position: relative; list-style: none; }
+/* line 137, ../sass/app.scss */
+header nav ul li { margin: 20px 8px 0; display: inline-block; }
+/* line 140, ../sass/app.scss */
+header nav ul li a { background: #ffffff; color: #15B592; display: block; padding: 6px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+/* line 150, ../sass/app.scss */
+header nav ul li a.selected { color: #ffffff; background: #15B592; }
+
+/* line 159, ../sass/app.scss */
 h1 { margin-top: 30px; letter-spacing: 4px; font-size: 38px; text-transform: uppercase; line-height: 1; }
 
-/* line 151, ../sass/app.scss */
+/* line 168, ../sass/app.scss */
 .panel h4 { color: #15B592; }
