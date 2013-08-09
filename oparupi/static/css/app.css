@@ -2508,7 +2508,7 @@ a.th { display: inline-block; }
 .f-dropdown.large { max-width: 800px; }
 
 /* line 58, ../sass/app.scss */
-body { border: 10px solid #ededed; }
+body { border: 8px solid #ededed; }
 
 /* line 64, ../sass/app.scss */
 .isotope, .isotope .isotope-item { /* change duration value to whatever you like */ -webkit-transition-duration: 0.8s; -moz-transition-duration: 0.8s; -ms-transition-duration: 0.8s; -o-transition-duration: 0.8s; transition-duration: 0.8s; }
