@@ -54,10 +54,6 @@
 // @import "foundation/components/tooltips";
 // @import "foundation/components/dropdown";
 
-// Page border
-body {
-  border: 8px solid #ededed;
-}
 
 // ISOTPE
 .isotope,
@@ -107,6 +103,16 @@ body {
 .isotope-hidden.isotope-item {
   pointer-events: none;
   z-index: 1;
+}
+
+
+/**** Html/Body Configuration ****/
+html{
+  height: 100%;
+  body {
+    min-height: 100%;
+    border: 8px solid #ededed;
+  }
 }
 
 // Header CSS
@@ -170,3 +176,6 @@ h1 {
   }
 }
 
+.start-hidden {
+  display: none;
+}

@@ -2507,50 +2507,56 @@ a.th { display: inline-block; }
 /* line 148, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_dropdown.scss */
 .f-dropdown.large { max-width: 800px; }
 
-/* line 58, ../sass/app.scss */
-body { border: 8px solid #ededed; }
-
-/* line 64, ../sass/app.scss */
+/* line 60, ../sass/app.scss */
 .isotope, .isotope .isotope-item { /* change duration value to whatever you like */ -webkit-transition-duration: 0.8s; -moz-transition-duration: 0.8s; -ms-transition-duration: 0.8s; -o-transition-duration: 0.8s; transition-duration: 0.8s; }
 
-/* line 73, ../sass/app.scss */
+/* line 69, ../sass/app.scss */
 .isotope { -webkit-transition-property: height, width; -moz-transition-property: height, width; -ms-transition-property: height, width; -o-transition-property: height, width; transition-property: height, width; }
 
-/* line 81, ../sass/app.scss */
+/* line 77, ../sass/app.scss */
 .isotope .isotope-item { -webkit-transition-property: -webkit-transform, opacity; -moz-transition-property: -moz-transform, opacity; -ms-transition-property: -ms-transform, opacity; -o-transition-property: -o-transform, opacity; transition-property: transform, opacity; }
 
 /**** disabling Isotope CSS3 transitions ****/
-/* line 93, ../sass/app.scss */
+/* line 89, ../sass/app.scss */
 .isotope.no-transition, .isotope.no-transition .isotope-item, .isotope .isotope-item.no-transition { -webkit-transition-duration: 0s; -moz-transition-duration: 0s; -ms-transition-duration: 0s; -o-transition-duration: 0s; transition-duration: 0s; }
 
 /**** Isotope filtering ****/
-/* line 103, ../sass/app.scss */
+/* line 99, ../sass/app.scss */
 .isotope-item { z-index: 2; }
 
-/* line 107, ../sass/app.scss */
+/* line 103, ../sass/app.scss */
 .isotope-hidden.isotope-item { pointer-events: none; z-index: 1; }
 
-/* line 113, ../sass/app.scss */
+/**** Html/Body Configuration ****/
+/* line 110, ../sass/app.scss */
+html { height: 100%; }
+/* line 112, ../sass/app.scss */
+html body { min-height: 100%; border: 8px solid #ededed; }
+
+/* line 119, ../sass/app.scss */
 header { position: relative; width: 80%; max-width: 1080px; margin: 0 auto; padding: 70px 0 20px; text-align: center; }
-/* line 120, ../sass/app.scss */
+/* line 126, ../sass/app.scss */
 header .avatar { display: inline-block; }
-/* line 122, ../sass/app.scss */
+/* line 128, ../sass/app.scss */
 header .avatar img { width: 70%; }
-/* line 125, ../sass/app.scss */
+/* line 131, ../sass/app.scss */
 header .avatar h1 { margin-bottom: 0px; }
-/* line 129, ../sass/app.scss */
+/* line 135, ../sass/app.scss */
 header .description { margin-top: 66px; padding: 0 20%; }
-/* line 134, ../sass/app.scss */
-header nav ul { position: relative; list-style: none; }
-/* line 137, ../sass/app.scss */
-header nav ul li { margin: 20px 8px 0; display: inline-block; }
 /* line 140, ../sass/app.scss */
+header nav ul { position: relative; list-style: none; }
+/* line 143, ../sass/app.scss */
+header nav ul li { margin: 20px 8px 0; display: inline-block; }
+/* line 146, ../sass/app.scss */
 header nav ul li a { background: #ffffff; color: #15B592; display: block; padding: 6px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-/* line 150, ../sass/app.scss */
+/* line 156, ../sass/app.scss */
 header nav ul li a.selected { color: #ffffff; background: #15B592; }
 
-/* line 159, ../sass/app.scss */
+/* line 165, ../sass/app.scss */
 h1 { margin-top: 30px; letter-spacing: 4px; font-size: 38px; text-transform: uppercase; line-height: 1; }
 
-/* line 168, ../sass/app.scss */
+/* line 174, ../sass/app.scss */
 .panel h4 { color: #15B592; }
+
+/* line 179, ../sass/app.scss */
+.start-hidden { display: none; }

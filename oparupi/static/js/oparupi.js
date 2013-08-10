@@ -8,4 +8,6 @@
 	    },
 	    empty_selection_behaviour: "hide"
 	});
+
+  $('.post').removeClass('start-hidden')
 })( jQuery );
