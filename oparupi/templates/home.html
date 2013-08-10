@@ -38,7 +38,7 @@
     <div class="small-12 columns">
       <div class="row posts">
       {% for post in posts%}
-        <div class="large-4 small-12 columns post"
+        <div class="large-4 small-12 columns post itecito-{{forloop.counter}}"
                 fiso-tags=".{% for tag in post.tags.all %}{{tag}}.{% endfor %}"
                 fiso-sections=".{{ post.section.title|slugify }}.">
 
