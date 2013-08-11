@@ -9,7 +9,7 @@
 	    	empty_selection_behaviour: "hide"
 	    },
 	    function ( $items ) {
-	    	$.scrollTo($('#nav'));
+	    	$.scrollTo($('#nav'), 3);
 	    }
 	);
 
