@@ -23,7 +23,7 @@
       <h1>Opárupi</h1>
     </a>
     <p class="description">De lo que sale, un poco de todos lados.</p>
-    <nav>
+    <nav id="nav">
       <ul>
         {% for section in sections %}
           <li><a href="#" class="fiso-toggle-category" fiso-facet="sections" fiso-category="{{section.title|slugify}}">{{section.title}}</a></li>
@@ -68,6 +68,7 @@
   <script src="{{ STATIC_URL }}js/vendor/jquery.ba-bbq.min.js"></script>
   <script src="{{ STATIC_URL }}js/vendor/jquery.isotope.min.js"></script>
   <script src="{{ STATIC_URL }}js/vendor/jquery.fisotope.js"></script>
+  <script src="{{ STATIC_URL }}js/vendor/jquery.scrollTo.min.js"></script>
   <script src="{{ STATIC_URL }}js/foundation/foundation.js"></script>
   <script src="{{ STATIC_URL }}js/foundation/foundation.cookie.js"></script>
   <script src="{{ STATIC_URL }}js/foundation/foundation.section.js"></script>
