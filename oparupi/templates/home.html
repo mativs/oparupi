@@ -12,7 +12,7 @@
     <h1>Opárupi</h1>
   </a>
   <p class="description">
-    De lo que sale, un poco de todos lados.
+    <a href='{% url "posts:detail" slug=post.slug %}'>"{{ post.title }}"</a>
   </p>
   <nav id="nav">
     <ul>
