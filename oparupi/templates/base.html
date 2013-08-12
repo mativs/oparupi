@@ -1,0 +1,48 @@
+{% load markdown_deux_tags %}
+{% load thumbnail %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{% block title %}Oparupi{% endblock title  %}</title>
+
+  
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+  <script src="{% static 'js/vendor/custom.modernizr.js' %}"></script>
+
+</head>
+<body>
+	{% block body %} {% endblock body %}
+  
+ 	<script src="{% static 'js/vendor/jquery.js' %}"></script>
+	<script src="{% static 'js/vendor/jquery.ba-bbq.min.js' %}"></script>
+	<script src="{% static 'js/vendor/jquery.isotope.min.js' %}"></script>
+	<script src="{% static 'js/vendor/jquery.fisotope.js' %}"></script>
+	<script src="{% static 'js/vendor/jquery.scrollTo.min.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.cookie.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.section.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.reveal.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.forms.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.abide.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.joyride.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.tooltips.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.placeholder.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.orbit.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.dropdown.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.topbar.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.magellan.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.clearing.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.interchange.js' %}"></script>
+	<script src="{% static 'js/foundation/foundation.alerts.js' %}"></script>
+	<script>
+	$(document).foundation();
+	</script>
+<script src="{% static 'js/oparupi.js' %}"></script>
+</body>
+</html>

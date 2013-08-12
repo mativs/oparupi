@@ -1,25 +1,14 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
 {% load markdown_deux_tags %}
 {% load thumbnail %}
-<!DOCTYPE html>
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Oparupi</title>
 
-  
-  <link rel="stylesheet" href="{{ STATIC_URL }}css/app.css">
-  <link rel="stylesheet" href="{{ STATIC_URL }}css/precrafted-social.css">
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
-  <script src="{{ STATIC_URL }}js/vendor/custom.modernizr.js"></script>
-
-</head>
-<body>
-  <header>
+{% block body %}
+<header>
     <a href="/" title="Simplist" class="avatar circle">
-      <img src="{{ STATIC_URL }}img/logo.png" alt="Simplist">
+      <img src="{% static 'img/logo.png' %}" alt="Simplist">
       <h1>Opárupi</h1>
     </a>
     <p class="description">De lo que sale, un poco de todos lados.</p>
@@ -61,33 +50,5 @@
       </div>
     </div>
   </div>
-
-
   
-  <script src="{{ STATIC_URL }}js/vendor/jquery.js"></script>
-  <script src="{{ STATIC_URL }}js/vendor/jquery.ba-bbq.min.js"></script>
-  <script src="{{ STATIC_URL }}js/vendor/jquery.isotope.min.js"></script>
-  <script src="{{ STATIC_URL }}js/vendor/jquery.fisotope.js"></script>
-  <script src="{{ STATIC_URL }}js/vendor/jquery.scrollTo.min.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.cookie.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.section.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.reveal.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.forms.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.abide.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.joyride.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.tooltips.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.placeholder.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.orbit.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.dropdown.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.topbar.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.magellan.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.clearing.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.interchange.js"></script>
-  <script src="{{ STATIC_URL }}js/foundation/foundation.alerts.js"></script>
-  <script>
-    $(document).foundation();
-  </script>
-  <script src="{{STATIC_URL}}js/oparupi.js"></script>
-</body>
-</html>
+{% endblock body %}
