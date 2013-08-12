@@ -8,7 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'oparupi.views.home', name='home'),
-    url(r'^posts/', include('oparupi.posts.urls')),
+    url(r'^posts/', include('oparupi.posts.urls', namespace="posts")),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),

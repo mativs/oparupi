@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load markdown_deux_tags %}
+
+{% block body %}
+<div class="row">
+  <div class="small-12 columns">
+    <article class="panel">
+        <h4>{{ object.title }}</h4>
+        <p>{{ object.body|markdown:"trusted"|truncatewords_html:30 }}</p>
+          {% for tag in object.tags.all %}
+        <small>{{tag}}</small>
+          {% endfor %}
+	</article>
+  </div>
+</div>
+	
+{% endblock body %}

@@ -1,5 +1,9 @@
 from django.http import HttpResponse
+from django.views import generic
 
-def index(request):
-  return HttpResponse("Hello, world. You are at the post view")
-# Create your views here.
+
+from oparupi.posts.models import Post
+
+class DetailView(generic.DetailView):
+	model = Post
+	template_name = 'posts/detail.html'

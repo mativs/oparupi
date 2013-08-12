@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from sorl.thumbnail import ImageField
 
 from taggit.managers import TaggableManager
@@ -26,6 +27,7 @@ class Post(models.Model):
         return self.title
 
     title = models.CharField(max_length=256)
+    slug = models.SlugField()
     body = models.TextField()
     photo = ImageField(upload_to='photos', blank=True, null=True)
     section = models.ForeignKey(Section, related_name='posts')

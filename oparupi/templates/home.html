@@ -7,48 +7,53 @@
 
 {% block body %}
 <header>
-    <a href="/" title="Simplist" class="avatar circle">
-      <img src="{% static 'img/logo.png' %}" alt="Simplist">
-      <h1>Opárupi</h1>
-    </a>
-    <p class="description">De lo que sale, un poco de todos lados.</p>
-    <nav id="nav">
-      <ul>
-        {% for section in sections %}
-          <li><a href="#" class="fiso-toggle-category" fiso-facet="sections" fiso-category="{{section.title|slugify}}">{{section.title}}</a></li>
-        {% endfor %}
-      </ul>    
-     
-    </nav>
-  </header>
+  <a href="/" title="Simplist" class="avatar circle">
+    <img src="{% static 'img/logo.png' %}" alt="Simplist">
+    <h1>Opárupi</h1>
+  </a>
+  <p class="description">
+    De lo que sale, un poco de todos lados.
+  </p>
+  <nav id="nav">
+    <ul>
+      {% for section in sections %}
+        <li>
+          <a href="#" class="fiso-toggle-category" fiso-facet="sections" fiso-category="{{section.title|slugify}}">
+            {{section.title}}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>    
+  </nav>
+</header>
 
   
-  <div class="row">
-    <div class="small-12 columns">
-      <div class="row posts">
-      {% for post in posts%}
-        <div class="large-4 small-12 columns post start-hidden"
-                fiso-tags=".{% for tag in post.tags.all %}{{tag}}.{% endfor %}"
-                fiso-sections=".{{ post.section.title|slugify }}.">
+<div class="row">
+  <div class="small-12 columns">
+    <div class="row posts">
+    {% for post in posts%}
+      <article class="large-4 small-12 columns post start-hidden"
+              fiso-tags=".{% for tag in post.tags.all %}{{tag}}.{% endfor %}"
+              fiso-sections=".{{ post.section.title|slugify }}.">
 
-          {% if post.photo %}{% thumbnail post.photo "500" crop="center" as im %}
-            <div class="panel">
-              <img src="{{im.url}}">
-            </div>
-          {% endthumbnail %}{% endif %}
-
+        {% if post.photo %}{% thumbnail post.photo "500" crop="center" as im %}
           <div class="panel">
-            <h4>{{ post.title }}</h4>
-            <p>{{ post.body|markdown:"trusted"|truncatewords_html:30 }}</p>
-            {% for tag in post.tags.all %}
-              <small><a href="#" class="fiso-toggle-category" fiso-facet="tags" fiso-category="{{tag}}">{{tag}}</a></small>
-            {% endfor %}
+            <img src="{{im.url}}">
           </div>
+        {% endthumbnail %}{% endif %}
 
+        <div class="panel">
+          <h4><a href="{% url 'posts:detail' slug=post.slug %}">{{ post.title }}</a></h4>
+          <p>{{ post.body|markdown:"trusted"|truncatewords_html:30 }}</p>
+          {% for tag in post.tags.all %}
+            <small><a href="#" class="fiso-toggle-category" fiso-facet="tags" fiso-category="{{tag}}">{{tag}}</a></small>
+          {% endfor %}
         </div>
-      {% endfor %}
-      </div>
+
+      </article>
+    {% endfor %}
     </div>
   </div>
+</div>
   
 {% endblock body %}
