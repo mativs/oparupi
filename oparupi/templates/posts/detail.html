@@ -1,18 +1,28 @@
 {% extends "base.html" %}
 
 {% load markdown_deux_tags %}
+{% load staticfiles  %}
+{% load thumbnail %}
 
 {% block body %}
 <div class="row">
-  <div class="small-12 columns">
-    <article class="panel">
+  <div class="large-3 small-12 columns">
+    <a href="/" class="avatar circle">
+    <img src="{% static 'img/logo.png' %}" alt="Simplist">
+    </a>
+    <h1>Opárupi</h1>
+    {% if object.photo %}{% thumbnail object.photo "500" crop="center" as im %}
+        <img src="{{im.url}}">
+    {% endthumbnail %}{% endif %} 
+  </div>
+  <article class="large-9 small-12 columns panel">
         <h4>{{ object.title }}</h4>
-        <p>{{ object.body|markdown:"trusted"|truncatewords_html:30 }}</p>
+       
+        <p>{{ object.body|markdown:"trusted" }}</p>
           {% for tag in object.tags.all %}
         <small>{{tag}}</small>
           {% endfor %}
 	</article>
-  </div>
 </div>
 	
 {% endblock body %}
