@@ -9,10 +9,19 @@
 	    	empty_selection_behaviour: "hide"
 	    },
 	    function ( $items ) {
-	    	$.scrollTo($('#nav'), 3);
+	    	if ( $items.length == 0) {
+	    		$('#pre-header').slideDown(400);
+	    	} else {
+	    		$('#pre-header').slideUp(1000);
+	    	}
+	    	// $.scrollTo($('#nav'), 1);
 	    }
 	);
 
-  	$('.post').removeClass('start-hidden')
+	$('.fiso-toggle-category').click(function() {
+		
+	})
+  	
+  $('.post').removeClass('start-hidden')
 
 })( jQuery );

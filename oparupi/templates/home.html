@@ -7,13 +7,15 @@
 
 {% block body %}
 <header>
-  <a href="/" title="Simplist" class="avatar circle">
-    <img src="{% static 'img/logo.png' %}" alt="Simplist">
-    <h1>Opárupi</h1>
-  </a>
-  <p class="description">
-    <a href='{% url "posts:detail" slug=post.slug %}'>"{{ post.title }}"</a>
-  </p>
+  <div id="pre-header">
+    <a href="/" title="Simplist" class="avatar circle">
+      <img src="{% static 'img/logo.png' %}" alt="Simplist">
+      <h1>Opárupi</h1>
+    </a>
+    <p class="description">
+      <a href='{% url "posts:detail" slug=post.slug %}'>"{{ post.title }}"</a>
+    </p>
+  </div>
   <nav id="nav">
     <ul>
       <li><a href="#" class="fiso-toggle-clean" fiso-facet="all"> Oparupi</a></li>

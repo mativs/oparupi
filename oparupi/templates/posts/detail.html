@@ -5,12 +5,25 @@
 {% load thumbnail %}
 
 {% block body %}
-<div class="row">
-  <div class="large-3 small-12 columns">
+<div class="row header-post">
+  <div class="large-3 columns">
     <a href="/" class="avatar circle">
     <img src="{% static 'img/logo.png' %}" alt="Simplist">
     </a>
+  </div>
+  <div class="large-1 columns">
     <h1>Opárupi</h1>
+  </div>
+  <div class="large-1 columns">
+    <h4> {{ object.section }} </h4>
+  </div>
+  <div class="large-7 columns">
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-3 small-12 columns">
+    
     {% if object.photo %}{% thumbnail object.photo "500" crop="center" as im %}
         <img src="{{im.url}}">
     {% endthumbnail %}{% endif %} 

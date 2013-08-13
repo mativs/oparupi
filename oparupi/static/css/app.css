@@ -2531,36 +2531,40 @@ a.th { display: inline-block; }
 /* line 110, ../sass/app.scss */
 html { height: 100%; }
 /* line 112, ../sass/app.scss */
-html body { min-height: 100%; border: 8px solid #ededed; }
+html body { min-height: 100%; border: 8px solid #ededed; padding-top: 20px; }
 
-/* line 119, ../sass/app.scss */
-header { position: relative; width: 80%; max-width: 1080px; margin: 0 auto; padding: 70px 0 20px; text-align: center; }
-/* line 126, ../sass/app.scss */
-header .avatar { display: inline-block; }
+/* line 120, ../sass/app.scss */
+header { position: relative; width: 80%; max-width: 1080px; margin: 0 auto; padding: 50px 0 20px; text-align: center; }
 /* line 128, ../sass/app.scss */
-header .avatar img { width: 70%; }
-/* line 131, ../sass/app.scss */
-header .avatar h1 { margin-bottom: 0px; }
-/* line 135, ../sass/app.scss */
 header .description { margin-top: 66px; padding: 0 20%; }
-/* line 140, ../sass/app.scss */
+/* line 133, ../sass/app.scss */
 header nav ul { position: relative; list-style: none; }
-/* line 143, ../sass/app.scss */
+/* line 136, ../sass/app.scss */
 header nav ul li { margin: 20px 8px 0; display: inline-block; }
-/* line 146, ../sass/app.scss */
+/* line 139, ../sass/app.scss */
 header nav ul li a { background: #ffffff; color: #15B592; display: block; padding: 6px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-/* line 156, ../sass/app.scss */
+/* line 149, ../sass/app.scss */
 header nav ul li a.selected { color: #ffffff; background: #15B592; }
 
-/* line 165, ../sass/app.scss */
+/* line 158, ../sass/app.scss */
+.avatar { display: inline-block; }
+/* line 160, ../sass/app.scss */
+.avatar img { width: 70%; }
+/* line 163, ../sass/app.scss */
+.avatar h1 { margin-bottom: 0px; }
+
+/* line 168, ../sass/app.scss */
 h1 { margin-top: 30px; letter-spacing: 4px; font-size: 38px; text-transform: uppercase; line-height: 1; }
 
-/* line 176, ../sass/app.scss */
+/* line 179, ../sass/app.scss */
 .panel h4 { color: #15B592; }
-/* line 178, ../sass/app.scss */
+/* line 181, ../sass/app.scss */
 .panel h4 a { color: #15B592; }
-/* line 180, ../sass/app.scss */
+/* line 183, ../sass/app.scss */
 .panel h4 a:hover { color: #2ba6cb; }
 
-/* line 185, ../sass/app.scss */
+/* line 188, ../sass/app.scss */
 .start-hidden { display: none; }
+
+/* line 193, ../sass/app.scss */
+.header-post .columns, .header-post a { text-align: center; }
