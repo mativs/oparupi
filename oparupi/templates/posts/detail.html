@@ -4,33 +4,31 @@
 {% load staticfiles  %}
 {% load thumbnail %}
 
-{% block body %}
-<div class="row header-post">
-  <div class="large-3 columns">
-    <a href="/" class="avatar circle">
-    <img src="{% static 'img/logo.png' %}" alt="Simplist">
-    </a>
+{% block header-content %}
+ <nav id="nav">
+  <ul>
+    <li><a href="#"> {{ object.section }}</a></li>
+  </ul>    
+</nav>
+ <h1>{{ object.title }}</h1>   
+{% endblock header-content %}
+
+
+{% block content %}
+  {% if object.photo %}
+  {% thumbnail object.photo "500" crop="center" as im %}
+  <div class="row">
+    <div class="large-6 large-offset-3 small-12 columns panel">
+      
+          <img src="{{im.url}}">
+    </div>
   </div>
-  <div class="large-1 columns">
-    <h1>Opárupi</h1>
-  </div>
-  <div class="large-1 columns">
-    <h4> {{ object.section }} </h4>
-  </div>
-  <div class="large-7 columns">
-  </div>
-</div>
+  {% endthumbnail %}
+  {% endif %} 
 
 <div class="row">
-  <div class="large-3 small-12 columns">
-    
-    {% if object.photo %}{% thumbnail object.photo "500" crop="center" as im %}
-        <img src="{{im.url}}">
-    {% endthumbnail %}{% endif %} 
-  </div>
-  <article class="large-9 small-12 columns panel">
-        <h4>{{ object.title }}</h4>
-       
+  <article class="large-10 large-offset-1 small-12 columns panel">
+      
         <p>{{ object.body|markdown:"trusted" }}</p>
           {% for tag in object.tags.all %}
         <small>{{tag}}</small>
@@ -38,4 +36,4 @@
 	</article>
 </div>
 	
-{% endblock body %}
+{% endblock content %}

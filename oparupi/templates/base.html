@@ -17,7 +17,16 @@
 
 </head>
 <body>
-	{% block body %} {% endblock body %}
+	{% block header %}
+	<header>
+	    <a href="/" title="Simplist" class="avatar circle">
+	      	<img src="{% static 'img/logo.png' %}" alt="Simplist">
+	    </a>
+	   	{% block header-content %} {% endblock header-content %}
+		
+	</header> 
+	{% endblock header %}
+	{% block content %} {% endblock content %}
   
  	<script src="{% static 'js/vendor/jquery.js' %}"></script>
 	<script src="{% static 'js/vendor/jquery.ba-bbq.min.js' %}"></script>
