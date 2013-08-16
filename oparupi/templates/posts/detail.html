@@ -9,31 +9,36 @@
   <ul>
     <li><a href="#"> {{ object.section }}</a></li>
   </ul>    
-</nav>
- <h1>{{ object.title }}</h1>   
+</nav>  
+<div class="row">
+  <div class="large-10 large-offset-1 small-12 columns">
+    <h1>{{ object.title }}</h1> 
+  </div>
+</div>
 {% endblock header-content %}
 
 
 {% block content %}
+<article>
+  
   {% if object.photo %}
-  {% thumbnail object.photo "500" crop="center" as im %}
   <div class="row">
-    <div class="large-6 large-offset-3 small-12 columns panel">
-      
-          <img src="{{im.url}}">
+    <div class="large-6 large-offset-3 small-12 columns">
+      {% thumbnail post.photo "500" crop="center" as im %}
+            <img src="{{im.url}}">
+        {% endthumbnail %}
     </div>
   </div>
-  {% endthumbnail %}
   {% endif %} 
 
-<div class="row">
-  <article class="large-10 large-offset-1 small-12 columns panel">
-      
+  <div class="row">
+    <div class="large-10 large-offset-1 small-12 columns panel">
         <p>{{ object.body|markdown:"trusted" }}</p>
-          {% for tag in object.tags.all %}
-        <small>{{tag}}</small>
-          {% endfor %}
-	</article>
-</div>
-	
+        {% for tag in object.tags.all %}
+          <small>{{tag}}</small>
+        {% endfor %}
+  	</div>
+  </div>
+
+</article>
 {% endblock content %}

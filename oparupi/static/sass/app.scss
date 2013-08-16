@@ -118,51 +118,56 @@ html{
 
 // Header CSS
 header {
-  position: relative;
-  width: 80%;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 50px 0 20px;
   text-align: center;
-  
-  .description {
-    margin-top: 66px;
-    padding: 0 20%;
-  }
+  padding-top: 20px;
+  .row { margin-bottom: 10px }
   nav {
+    a small {
+      
+    }
     ul {
       position: relative;
       list-style: none;
+      font-size: 11px;
       li {
-        margin: 20px 8px 0;
         display: inline-block;
+        background: #ffffff;
+        color: #15B592;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
         a {
-          background: #ffffff;
-          color: #15B592;
           display: block;
-          padding: 6px 12px;
-          font-size: 11px;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          font-weight: 600;
         }
+      }
+      &.sections li {
+        margin: 0px 8px 0;
+        a {
+          padding: 6px 12px;
+          &.available {
+            color: #000;
+          }
+          &.selected {
+            color: #ffffff;
+            background: #15B592;
+          }
+        }
+      }
+      &.tags li {
+        margin: 0px 4px 0;
+        a { padding: 3px 6px; }
         a.selected {
           color: #ffffff;
-          background: #15B592;
+          background: #ffc541;
         }
       }
     }
   }
 }
 
-.avatar {
-  display: inline-block;
-  img {
-    width:70%;
-  }
-  h1 {
-    margin-bottom: 0px;
-  }
+.tag {
+  color: #ffc541;
+  font-size: emCalc(11);
 }
 
 h1 {
@@ -189,8 +194,3 @@ h1 {
   display: none;
 }
 
-.header-post {
-  .columns, a {
-    text-align: center;
-  }
-}
