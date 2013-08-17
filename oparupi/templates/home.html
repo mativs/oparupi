@@ -14,24 +14,12 @@
     </div>
   </div>
   <nav>
-    <ul class="sections">
-      {% for section in sections %}
-        <li>
-          <a href="#" class="fiso-toggle-category" fiso-facet="sections" fiso-category="{{section.title|slugify}}">
-            {{section.title}}
-          </a>
-        </li>
-      {% endfor %}
-    </ul> 
-    <ul class="tags">
-    {% for tag in tags %}
-    <li>
-      <a href="#" class="fiso-toggle-category tag" fiso-facet="tags" fiso-category="{{tag|slugify}}">
-        {{tag}} 
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
+    <ul class="fiso-selector" fiso-facet="sections">
+          <li class="fiso-example"><a href="#"></a></li>
+    </ul>
+    <ul class="fiso-selector" fiso-facet="tags">
+          <li class="fiso-example"><a href="#"></a></li>
+    </ul>
   </nav>
 {% endblock header-content %}
 

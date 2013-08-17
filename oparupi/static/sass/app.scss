@@ -55,6 +55,9 @@
 // @import "foundation/components/dropdown";
 
 
+@import "compass/css3/opacity";
+@import "compass/css3/inline-block";
+
 // ISOTPE
 .isotope,
 .isotope .isotope-item {
@@ -130,32 +133,34 @@ header {
       list-style: none;
       font-size: 11px;
       li {
-        display: inline-block;
+        @include inline-block;
         text-transform: uppercase;
         letter-spacing: 1px;
         font-weight: 600;
-        a {
-          background: #ffffff;
+      }
+      & li a {
+        background: #ffffff;
+        display: block;
+        &.not-available.not-selected { display: none; }
+        &.selected { color: #fff; }
+      }
+      &.fiso-no-available.fiso-no-selected li a {
+        &.not-available.not-selected { 
           display: block;
-          &.not-available.not-selected { display: none; }
-          &.selected { color: #fff; }
         }
       }
-      &.sections li {
-        a {
-          margin: 0px 8px 0;
-          padding: 6px 12px;
-          &.not-selected { color: #15B592;}
-          &.selected { background: #15B592; }
-        }
+      &[fiso-facet="sections"] li a {
+        margin: 0px 8px 0;
+        padding: 6px 12px;
+        &.not-selected { color: #15B592;}
+        &.selected { background: #15B592; }
       }
-      &.tags li {
-        a {
+      &[fiso-facet="tags"] li a {
           margin: 0px 4px 0;
           padding: 3px 6px;
+          font-size: emCalc(11);
           &.not-selected { color: #ffc541; }
           &.selected { background: #ffc541; }
-        }
       }
     }
   }

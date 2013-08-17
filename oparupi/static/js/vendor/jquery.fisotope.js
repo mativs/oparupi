@@ -452,13 +452,8 @@
 
 			var final_filter = or_filter.join();
 			if ( methods.settings.empty_selection_behaviour == "hide" && $.trim(final_filter) == '' ) {
-				//finddal_filter = 	'.asdlkfasdlkasdfkl32923u42kj349';
-				// $(methods.settings.itemSelector).hide();
-				$(methods.theElement).hide();
-			} else {
-				$(methods.theElement).show();
-				// $(methods.settings.itemSelector).show();
-			}
+				final_filter = 	'.asdlkfasdlkasdfkl32923u42kj349';
+			} 
 
 			methods.theElement.isotope( {
 					filter: final_filter,
