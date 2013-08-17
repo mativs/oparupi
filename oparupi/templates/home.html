@@ -6,9 +6,9 @@
 
 {% block header-content %}
   <div class="row"><div class="small-12"> <h1>Opárupi</h1> </div></div>
-  <div class="row">
+  <div class="row last-post">
     <div class="small-12">
-      <p class="description">
+      <p>
         <a href='{% url "posts:detail" slug=post.slug %}'>"{{ post.title }}"</a> 
       </p>
     </div>
