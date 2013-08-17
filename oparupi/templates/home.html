@@ -5,11 +5,13 @@
 {% load thumbnail %}
 
 {% block header-content %}
-  <div class="small-12"> <h1>Opárupi</h1> </div>
-  <div class="small-12">
-    <p class="description">
-      <a href='{% url "posts:detail" slug=post.slug %}'>"{{ post.title }}"</a> 
-    </p>
+  <div class="row"><div class="small-12"> <h1>Opárupi</h1> </div></div>
+  <div class="row">
+    <div class="small-12">
+      <p class="description">
+        <a href='{% url "posts:detail" slug=post.slug %}'>"{{ post.title }}"</a> 
+      </p>
+    </div>
   </div>
   <nav>
     <ul class="sections">
@@ -41,7 +43,7 @@
     <div class="row posts">
     {% for post in posts%}
       <article class="large-4 small-12 columns post start-hidden"
-              fiso-tags=".{% for tag in post.tags.all %}{{tag}}.{% endfor %}"
+              fiso-tags=".{% for tag in post.tags.all %}{{tag|slugify}}.{% endfor %}"
               fiso-sections=".{{ post.section.title|slugify }}.">
 
         {% if post.photo %}{% thumbnail post.photo "500" crop="center" as im %}

@@ -2536,40 +2536,44 @@ html body { min-height: 100%; border: 8px solid #ededed; padding-top: 20px; }
 /* line 120, ../sass/app.scss */
 header { text-align: center; padding-top: 20px; }
 /* line 123, ../sass/app.scss */
-header .row { margin-bottom: 10px; }
+header .description { margin-top: 10px; }
+/* line 126, ../sass/app.scss */
+header nav { margin-top: 40px; }
 /* line 128, ../sass/app.scss */
 header nav ul { position: relative; list-style: none; font-size: 11px; }
 /* line 132, ../sass/app.scss */
-header nav ul li { display: inline-block; background: #ffffff; color: #15B592; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-/* line 139, ../sass/app.scss */
-header nav ul li a { display: block; }
-/* line 143, ../sass/app.scss */
-header nav ul.sections li { margin: 0px 8px 0; }
+header nav ul li { display: inline-block; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+/* line 137, ../sass/app.scss */
+header nav ul li a { background: #ffffff; display: block; }
+/* line 140, ../sass/app.scss */
+header nav ul li a.not-available.not-selected { display: none; }
+/* line 141, ../sass/app.scss */
+header nav ul li a.selected { color: #fff; }
 /* line 145, ../sass/app.scss */
-header nav ul.sections li a { padding: 6px 12px; }
-/* line 147, ../sass/app.scss */
-header nav ul.sections li a.available { color: #000; }
-/* line 150, ../sass/app.scss */
-header nav ul.sections li a.selected { color: #ffffff; background: #15B592; }
+header nav ul.sections li a { margin: 0px 8px 0; padding: 6px 12px; }
+/* line 148, ../sass/app.scss */
+header nav ul.sections li a.not-selected { color: #15B592; }
+/* line 149, ../sass/app.scss */
+header nav ul.sections li a.selected { background: #15B592; }
+/* line 153, ../sass/app.scss */
+header nav ul.tags li a { margin: 0px 4px 0; padding: 3px 6px; }
 /* line 156, ../sass/app.scss */
-header nav ul.tags li { margin: 0px 4px 0; }
-/* line 158, ../sass/app.scss */
-header nav ul.tags li a { padding: 3px 6px; }
-/* line 159, ../sass/app.scss */
-header nav ul.tags li a.selected { color: #ffffff; background: #ffc541; }
+header nav ul.tags li a.not-selected { color: #ffc541; }
+/* line 157, ../sass/app.scss */
+header nav ul.tags li a.selected { background: #ffc541; }
 
-/* line 168, ../sass/app.scss */
+/* line 164, ../sass/app.scss */
 .tag { color: #ffc541; font-size: 0.6875em; }
 
-/* line 173, ../sass/app.scss */
+/* line 169, ../sass/app.scss */
 h1 { margin-top: 30px; letter-spacing: 4px; font-size: 38px; text-transform: uppercase; line-height: 1; }
 
-/* line 184, ../sass/app.scss */
+/* line 180, ../sass/app.scss */
 .panel h4 { color: #15B592; }
-/* line 186, ../sass/app.scss */
+/* line 182, ../sass/app.scss */
 .panel h4 a { color: #15B592; }
-/* line 188, ../sass/app.scss */
+/* line 184, ../sass/app.scss */
 .panel h4 a:hover { color: #2ba6cb; }
 
-/* line 193, ../sass/app.scss */
+/* line 189, ../sass/app.scss */
 .start-hidden { display: none; }

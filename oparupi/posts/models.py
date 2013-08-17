@@ -27,7 +27,7 @@ class Post(models.Model):
         return self.title
 
     title = models.CharField(max_length=256)
-    slug = models.SlugField()
+    slug = models.SlugField(max_length=256)
     body = models.TextField()
     photo = ImageField(upload_to='photos', blank=True, null=True)
     section = models.ForeignKey(Section, related_name='posts')
