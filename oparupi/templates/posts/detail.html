@@ -5,34 +5,41 @@
 {% load thumbnail %}
 
 {% block header-content %}
- <nav id="nav">
-  <ul>
-    <li><a href="#"> {{ object.section }}</a></li>
-  </ul>    
-</nav>  
-<div class="row">
-  <div class="large-10 large-offset-1 small-12 columns">
-    <h1>{{ object.title }}</h1> 
-  </div>
-</div>
+ <div class="row"><div class="small-12"> <h1>{{ object.title }}</h1> </div></div>
+ <nav>
+    <ul fiso-facet="sections">
+      <li><a class="selected" href="#">{{ object.section }}</a></li>
+    </ul>
+    <ul fiso-facet="tags">
+      {% for tag in object.tags.all %}
+        <li ><a class="selected" href="#">{{tag}}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
 {% endblock header-content %}
 
 
 {% block content %}
 <article>
-  
+
   {% if object.photo %}
-  <div class="row">
-    <div class="large-6 large-offset-3 small-12 columns">
-      {% thumbnail post.photo "500" crop="center" as im %}
-            <img src="{{im.url}}">
-        {% endthumbnail %}
-    </div>
-  </div>
-  {% endif %} 
+    {% thumbnail object.photo "500" crop="center" as im %}
+      <div class="row">
+        {% if im.width > im.height %}
+          <div class="large-6 large-offset-3 small-12 columns panel">
+          {% else %}
+          <div class="large-4 large-offset-4 small-12 columns panel">
+          {% endif %}
+                <img src="{{im.url}}">
+          </div>
+      </div>
+    {% endthumbnail %}
+  {% endif %}
+
 
   <div class="row">
     <div class="large-10 large-offset-1 small-12 columns panel">
+        
         <p>{{ object.body|markdown:"trusted" }}</p>
         {% for tag in object.tags.all %}
           <small>{{tag}}</small>

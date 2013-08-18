@@ -763,7 +763,7 @@ th.hide-for-touch { display: table-cell !important; }
   /* line 41, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_block-grid.scss */
   .large-block-grid-12 > li:nth-of-type(12n+1) { clear: both; } }
 /* line 110, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_type.scss */
-p.lead { font-size: 1.28125em; line-height: 1.6; }
+p.lead { font-size: 1.15625em; line-height: 1.6; }
 
 /* line 115, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_type.scss */
 .subheader { line-height: 1.4; color: #74efd4; font-weight: 300; margin-top: 0.2em; margin-bottom: 0.5em; }
@@ -782,7 +782,7 @@ a img { border: none; }
 
 /* Default paragraph styles */
 /* line 163, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_type.scss */
-p { font-family: inherit; font-weight: normal; font-size: 1.0625em; line-height: 1.6; margin-bottom: 1.25em; text-rendering: optimizeLegibility; }
+p { font-family: inherit; font-weight: normal; font-size: 0.9375em; line-height: 1.6; margin-bottom: 1.25em; text-rendering: optimizeLegibility; }
 /* line 173, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_type.scss */
 p aside { font-size: 0.875em; line-height: 1.35; font-style: italic; }
 
@@ -828,7 +828,7 @@ code { font-family: Consolas, "Liberation Mono", Courier, monospace; font-weight
 
 /* Lists */
 /* line 242, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_type.scss */
-ul, ol, dl { font-size: 1.0625em; line-height: 1.6; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
+ul, ol, dl { font-size: 0.9375em; line-height: 1.6; margin-bottom: 1.25em; list-style-position: outside; font-family: inherit; }
 
 /* line 250, ../../../../../../../var/lib/gems/1.9.1/gems/zurb-foundation-4.3.1/scss/foundation/components/_type.scss */
 ul, ol { margin-left: 0; }
@@ -2537,8 +2537,6 @@ html body { min-height: 100%; border: 8px solid #ededed; padding-top: 20px; }
 header { text-align: center; padding-top: 20px; }
 /* line 126, ../sass/app.scss */
 header .description { margin-top: 10px; }
-/* line 129, ../sass/app.scss */
-header nav { margin-top: 40px; }
 /* line 131, ../sass/app.scss */
 header nav ul { position: relative; list-style: none; font-size: 11px; }
 /* line 135, ../sass/app.scss */
@@ -2547,35 +2545,35 @@ header nav ul li { display: -moz-inline-stack; display: inline-block; vertical-a
 header nav ul li a { background: #ffffff; display: block; }
 /* line 145, ../sass/app.scss */
 header nav ul li a.not-available.not-selected { display: none; }
-/* line 146, ../sass/app.scss */
-header nav ul li a.selected { color: #fff; }
 /* line 149, ../sass/app.scss */
 header nav ul.fiso-no-available.fiso-no-selected li a.not-available.not-selected { display: block; }
 /* line 153, ../sass/app.scss */
-header nav ul[fiso-facet="sections"] li a { margin: 0px 8px 0; padding: 6px 12px; }
-/* line 156, ../sass/app.scss */
-header nav ul[fiso-facet="sections"] li a.not-selected { color: #15B592; }
+header nav ul[fiso-facet="sections"] li a { margin: 0px 8px 0; padding: 6px 12px; color: #15B592; }
 /* line 157, ../sass/app.scss */
+header nav ul[fiso-facet="sections"] li a.selected { color: #fff; }
+/* line 158, ../sass/app.scss */
 header nav ul[fiso-facet="sections"] li a.selected { background: #15B592; }
-/* line 159, ../sass/app.scss */
-header nav ul[fiso-facet="tags"] li a { margin: 0px 4px 0; padding: 3px 6px; font-size: 0.6875em; }
-/* line 163, ../sass/app.scss */
-header nav ul[fiso-facet="tags"] li a.not-selected { color: #ffc541; }
-/* line 164, ../sass/app.scss */
+/* line 160, ../sass/app.scss */
+header nav ul[fiso-facet="tags"] li a { margin: 0px 4px 0; padding: 3px 6px; font-size: 0.6875em; color: #ffc541; }
+/* line 165, ../sass/app.scss */
+header nav ul[fiso-facet="tags"] li a.selected { color: #fff; }
+/* line 166, ../sass/app.scss */
 header nav ul[fiso-facet="tags"] li a.selected { background: #ffc541; }
 
-/* line 170, ../sass/app.scss */
+/* line 172, ../sass/app.scss */
 .tag { color: #ffc541; font-size: 0.6875em; }
 
-/* line 175, ../sass/app.scss */
-h1 { margin-top: 30px; letter-spacing: 4px; font-size: 38px; text-transform: uppercase; line-height: 1; }
+/* line 177, ../sass/app.scss */
+h1 { text-align: center; margin-top: 30px; letter-spacing: 4px; font-size: 38px; text-transform: uppercase; line-height: 1; }
+/* line 178, ../sass/app.scss */
+.panel h1 { color: #15B592; }
 
-/* line 186, ../sass/app.scss */
+/* line 192, ../sass/app.scss */
 .panel h4 { color: #15B592; }
-/* line 188, ../sass/app.scss */
+/* line 194, ../sass/app.scss */
 .panel h4 a { color: #15B592; }
-/* line 190, ../sass/app.scss */
+/* line 196, ../sass/app.scss */
 .panel h4 a:hover { color: #2ba6cb; }
 
-/* line 195, ../sass/app.scss */
+/* line 201, ../sass/app.scss */
 .start-hidden { display: none; }
