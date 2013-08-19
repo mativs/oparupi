@@ -6,11 +6,11 @@
 	    	empty_selection_behaviour: "hide"
 	    },
 	    function ( $items ) {
-	    	$.scrollTo($('header nav'), 1);
+	    	$.scrollTo($('#minav'), 1000 );
 	    }
 	);
 
-  $('.post').removeClass('start-hidden')
+  $('.post').removeClass('start-hidden');
 
   $('.last-post').cycle({
 		fx: 'fade',

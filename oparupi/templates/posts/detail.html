@@ -8,11 +8,11 @@
  <div class="row"><div class="small-12 large-10 large-offset-1 columns"> <h2>{{ object.title }}</h2> </div></div>
  <nav>
     <ul fiso-facet="sections">
-      <li><a class="selected" href="#">{{ object.section }}</a></li>
+      <li><a class="selected" href="/#sections_cats=.{{object.section.title|slugify}}.">{{ object.section }}</a></li>
     </ul>
     <ul fiso-facet="tags">
       {% for tag in object.tags.all %}
-        <li ><a class="selected" href="#">{{tag}}</a></li>
+        <li ><a class="selected" href="/#tags_cats=.{{tag|slugify}}.">{{tag}}</a></li>
       {% endfor %}
     </ul>
   </nav>

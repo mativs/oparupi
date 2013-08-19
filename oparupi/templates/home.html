@@ -22,7 +22,7 @@
       <div class="last-post">
         {% for section in sections %}
           {% if section.latest %}
-            <article category="{{section.title|slugify}}">
+            <article category="{{section.title|slugify}}" class="start-hidden">
               <h3><a href='{% url "posts:detail" slug=section.latest.slug %}'>"{{ section.latest.title }}"</a></h3>
               
               <i>{{ section.latest.body|markdown:"trusted"|truncatewords_html:20 }}</i>
@@ -32,7 +32,7 @@
       </div>
     </div>
   </div>
-  <nav>
+  <nav id="minav">
     <ul class="fiso-selector" fiso-facet="sections">
           <li class="fiso-example"><a href="#"></a></li>
     </ul>
