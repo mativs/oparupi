@@ -10,16 +10,16 @@
   <div class="row">
     <div class="small-12 large-12 columns">
       <div class="last-post">
-    {% for section in sections %}
-      {% if section.latest %}
-        <article category="{{section.title|slugify}}">
-          <h3><a href='{% url "posts:detail" slug=section.latest.slug %}'>"{{ section.latest.title }}"</a></h3>
-          
-          <i>{{ section.latest.body|markdown:"trusted"|truncatewords_html:10 }}</i>
-        </article>
-      {% endif %}
-    {% endfor %}
-  </div>
+        {% for section in sections %}
+          {% if section.latest %}
+            <article category="{{section.title|slugify}}">
+              <h3><a href='{% url "posts:detail" slug=section.latest.slug %}'>"{{ section.latest.title }}"</a></h3>
+              
+              <i>{{ section.latest.body|markdown:"trusted"|truncatewords_html:20 }}</i>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
   </div>
   <nav>

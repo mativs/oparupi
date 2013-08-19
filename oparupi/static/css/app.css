@@ -2538,7 +2538,7 @@ header { text-align: center; padding-top: 20px; }
 /* line 126, ../sass/app.scss */
 header .description { margin-top: 10px; }
 /* line 129, ../sass/app.scss */
-header .last-post { min-height: 130px; }
+header .last-post { min-height: 150px; }
 /* line 132, ../sass/app.scss */
 header article { width: 100%; }
 /* line 137, ../sass/app.scss */
