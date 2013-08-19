@@ -12,4 +12,11 @@
 
   $('.post').removeClass('start-hidden')
 
+  $('.last-post').cycle({
+		fx: 'fade',
+		delay:  -4000,
+		timeout: 10000,
+		speed: 500
+	});
+
 })( jQuery );

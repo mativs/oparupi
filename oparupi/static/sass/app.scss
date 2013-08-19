@@ -126,6 +126,12 @@ header {
   .description {
     margin-top: 10px;
   }
+  .last-post {
+    min-height: 130px;
+  }
+  article {
+    width: 100%;
+  }
   nav {
     
     ul {
@@ -154,16 +160,20 @@ header {
         margin: 0px 8px 0;
         padding: 6px 12px;
         color: #15B592;
-        &.selected { color: #fff; }
-        &.selected { background: #15B592; }
+        &.selected { 
+          color: #fff; 
+          background: #15B592;
+        }
       }
       &[fiso-facet="tags"] li a {
           margin: 0px 4px 0;
           padding: 3px 6px;
           font-size: emCalc(11);
           color: #ffc541; 
-          &.selected { color: #fff; }
-          &.selected { background: #ffc541; }
+          &.selected {
+            color: #fff; 
+            background: #ffc541;
+          }
       }
     }
   }
