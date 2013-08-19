@@ -4,6 +4,16 @@
 {% load markdown_deux_tags %}
 {% load thumbnail %}
 
+{% block javascript %}
+  {{ block.super}}
+  <script src="{% static 'js/vendor/jquery-migrate-1.2.1.js' %}"></script>
+  <script src="{% static 'js/vendor/jquery.ba-bbq.min.js' %}"></script>
+  <script src="{% static 'js/vendor/jquery.isotope.min.js' %}"></script>
+  <script src="{% static 'js/vendor/jquery.fisotope.js' %}"></script>
+  <script src="{% static 'js/vendor/jquery.scrollTo.min.js' %}"></script>
+  <script src="{% static 'js/vendor/jquery.cycle.lite.js' %}"></script>
+{% endblock javascript %}
+
 {% block header-content %}
   <div class="row"><div class="small-12"> <h1>Opárupi</h1> </div></div>
   

@@ -32,32 +32,28 @@
   </header> 
   {% block content %} {% endblock content %}
   
- 	<script src="{% static 'js/vendor/jquery-1.10.2.min.js' %}"></script>
-  <script src="{% static 'js/vendor/jquery-migrate-1.2.1.js' %}"></script>
-	<script src="{% static 'js/vendor/jquery.ba-bbq.min.js' %}"></script>
-	<script src="{% static 'js/vendor/jquery.isotope.min.js' %}"></script>
-	<script src="{% static 'js/vendor/jquery.fisotope.js' %}"></script>
-	<script src="{% static 'js/vendor/jquery.scrollTo.min.js' %}"></script>
-  <script src="{% static 'js/vendor/jquery.cycle.lite.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.cookie.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.section.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.reveal.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.forms.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.abide.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.joyride.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.tooltips.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.placeholder.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.orbit.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.dropdown.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.topbar.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.magellan.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.clearing.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.interchange.js' %}"></script>
-	<script src="{% static 'js/foundation/foundation.alerts.js' %}"></script>
-	<script>
-	$(document).foundation();
-	</script>
-<script src="{% static 'js/oparupi.js' %}"></script>
+  {% block javascript %}
+  <script src="{% static 'js/vendor/jquery-1.10.2.min.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.cookie.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.section.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.reveal.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.forms.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.abide.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.joyride.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.tooltips.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.placeholder.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.orbit.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.dropdown.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.topbar.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.magellan.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.clearing.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.interchange.js' %}"></script>
+  <script src="{% static 'js/foundation/foundation.alerts.js' %}"></script>
+  <script>
+  $(document).foundation();
+  </script>
+  {% endblock javascript %}
+  <script src="{% static 'js/oparupi.js' %}"></script>
 </body>
 </html>
