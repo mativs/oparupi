@@ -41,9 +41,10 @@
     <div class="large-10 large-offset-1 small-12 columns panel">
         
         <p>{{ object.body|markdown:"trusted" }}</p>
-        {% for tag in object.tags.all %}
-          <small>{{tag}}</small>
-        {% endfor %}
+        <footer >
+          <small>{{ object.created }}</small>
+        </footer>
+
   	</div>
   </div>
 

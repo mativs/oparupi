@@ -2570,12 +2570,15 @@ h1 { text-align: center; margin-top: 30px; letter-spacing: 4px; font-size: 38px;
 /* line 196, ../sass/app.scss */
 .panel h1 { color: #15B592; }
 
-/* line 210, ../sass/app.scss */
+/* line 209, ../sass/app.scss */
+article footer { text-align: center; }
+
+/* line 215, ../sass/app.scss */
 .panel h4 { color: #15B592; }
-/* line 212, ../sass/app.scss */
+/* line 217, ../sass/app.scss */
 .panel h4 a { color: #15B592; }
-/* line 214, ../sass/app.scss */
+/* line 219, ../sass/app.scss */
 .panel h4 a:hover { color: #2ba6cb; }
 
-/* line 219, ../sass/app.scss */
+/* line 224, ../sass/app.scss */
 .start-hidden { display: none; }
