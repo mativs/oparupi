@@ -76,7 +76,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 2, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 1
   }
 },
@@ -85,7 +85,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 3, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 1
   }
 },
@@ -94,7 +94,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 1, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 2
   }
 },
@@ -103,7 +103,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 2, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 3
   }
 },
@@ -112,7 +112,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 4, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 4
   }
 },
@@ -121,7 +121,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 2, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 5
   }
 },
@@ -130,7 +130,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 3, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 6
   }
 },
@@ -139,7 +139,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 5, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 6
   }
 },
@@ -148,7 +148,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 2, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 7
   }
 },
@@ -157,7 +157,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 1, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 8
   }
 },
@@ -166,7 +166,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 2, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 9
   }
 },
@@ -175,7 +175,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 2, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 10
   }
 },
@@ -184,7 +184,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 5, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 11
   }
 },
@@ -193,7 +193,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 6, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 11
   }
 },
@@ -202,7 +202,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 5, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 12
   }
 },
@@ -211,7 +211,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 6, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 12
   }
 },
@@ -220,7 +220,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 3, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 13
   }
 },
@@ -229,7 +229,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 5, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 13
   }
 },
@@ -238,7 +238,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 1, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 14
   }
 },
@@ -247,7 +247,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 2, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 15
   }
 },
@@ -256,7 +256,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 2, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 16
   }
 },
@@ -265,7 +265,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 1, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 17
   }
 },
@@ -274,7 +274,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 1, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 18
   }
 },
@@ -283,7 +283,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 1, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 19
   }
 },
@@ -292,7 +292,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 5, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 20
   }
 },
@@ -301,7 +301,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 6, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 20
   }
 },
@@ -310,7 +310,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 4, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 21
   }
 },
@@ -319,7 +319,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 5, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 22
   }
 },
@@ -328,7 +328,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 6, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 22
   }
 },
@@ -337,7 +337,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 4, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 23
   }
 },
@@ -346,7 +346,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 6, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 23
   }
 },
@@ -355,7 +355,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 2, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 24
   }
 },
@@ -364,7 +364,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 7, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 26
   }
 },
@@ -373,7 +373,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 8, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 27
   }
 },
@@ -382,7 +382,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 9, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 27
   }
 },
@@ -391,7 +391,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 9, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 28
   }
 },
@@ -400,7 +400,7 @@
   "model": "taggit.taggeditem", 
   "fields": {
     "tag": 4, 
-    "content_type": 9, 
+    "content_type": 13, 
     "object_id": 25
   }
 }
