@@ -58,14 +58,21 @@
         <div class="panel">
           <h4><a href="{% url 'posts:detail' slug=post.slug %}">{{ post.title }}</a></h4>
           {% if post.photo %}{% thumbnail post.photo "500" crop="center" as im %}
-          <div class="">
-            <img src="{{im.url}}">
-          </div>
-        {% endthumbnail %}{% endif %}
+            <div class="">
+              <img src="{{im.url}}">
+            </div>
+          {% endthumbnail %}{% endif %}
           <p>{{ post.body|markdown:"trusted"|truncatewords_html:40 }}</p>
-          {% for tag in post.tags.all %}
-            <a href="#" class="fiso-toggle-category tag" fiso-facet="tags" fiso-category="{{tag}}">{{tag}}</a>
-          {% endfor %}
+          <div class="row">
+            <div class="small-12 large-6 columns">
+            {% for tag in post.tags.all %}
+              <a href="#" class="fiso-toggle-category tag" fiso-facet="tags" fiso-category="{{tag}}">{{tag}}</a>
+            {% endfor %}
+            </div>
+            <div class="small-12 large-6 columns">
+              <small class="date">{{ post.created }}</small>
+            </div>
+          </div>
         </div>
 
       </article>

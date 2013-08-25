@@ -25,13 +25,9 @@
   {% if object.photo %}
     {% thumbnail object.photo "500" crop="center" as im %}
       <div class="row">
-        {% if im.width > im.height %}
-          <div class="large-6 large-offset-3 small-12 columns panel">
-          {% else %}
-          <div class="large-4 large-offset-4 small-12 columns panel">
-          {% endif %}
-                <img src="{{im.url}}">
-          </div>
+        <div class="{% if im.width > im.height %} large-6 large-offset-3 {% else %} large-4 large-offset-4 {% endif %} small-12 columns panel">
+          <img src="{{im.url}}">
+        </div>
       </div>
     {% endthumbnail %}
   {% endif %}

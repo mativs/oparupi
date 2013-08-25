@@ -2586,6 +2586,8 @@ footer small { font-size: 70%; }
 .panel h4 a { color: #15B592; }
 /* line 230, ../sass/app.scss */
 .panel h4 a:hover { color: #2ba6cb; }
+/* line 233, ../sass/app.scss */
+.panel .date { text-align: right; }
 
-/* line 235, ../sass/app.scss */
+/* line 238, ../sass/app.scss */
 .start-hidden { display: none; }
