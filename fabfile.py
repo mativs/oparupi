@@ -22,11 +22,11 @@ def runserver():
 def setup():
 	local("virtualenv --no-site-packages --distribute venv")		
 	with prefix(env.venv_script):
-		local("pip install -r requirements.txt")
-		local("pyhon manage.py syncdb")
-		local("pyhon manage.py migrate")
-		local("pyhon manage.py loaddata db/posts.json")
-		local("pyhon manage.py loaddata db/tags.json")
+		local("pip install -r requirements.txtsh ")
+		local("python manage.py syncdb")
+		local("python manage.py migrate")
+		local("python manage.py loaddata db/posts.json")
+		local("python manage.py loaddata db/tags.json")
 
 def deploy():
 	pass
