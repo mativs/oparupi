@@ -22,7 +22,7 @@ def runserver():
 def setup():
 	local("virtualenv --no-site-packages --distribute venv")		
 	with prefix(env.venv_script):
-		local("pip install -r requirements.txtsh ")
+		local("pip install -r requirements.txt")
 		local("python manage.py syncdb")
 		local("python manage.py migrate")
 		local("python manage.py loaddata db/posts.json")
