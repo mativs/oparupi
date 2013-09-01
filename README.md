@@ -6,6 +6,14 @@ Oparupi
 Requirements
 ===========
 
-sudo apt-get install libjpeg62 libjpeg62-dev zlib1g-dev
 
-python manage.py createcachetable oparupi_cache
+
+Configure Vagrant
+=================
+
+    vagrant init precise32 http://files.vagrantup.com/precise32.box
+
+Setup Development Environment
+=============================
+
+    fab setup

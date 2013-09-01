@@ -15,3 +15,7 @@ venv
 
 # Media files
 media
+
+# Vagrant files
+.vagrant
+
