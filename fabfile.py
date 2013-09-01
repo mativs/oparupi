@@ -24,17 +24,17 @@ def runserver():
 		local("python manage.py runserver")
 
 def setup():
+	""" Setup project locally """
+	mode_local()
 	local("virtualenv --no-site-packages --distribute venv")		
 	with prefix(env.venv_script):
 		local("pip install -r requirements.txt")
+		local("cp oparupi/conf/local.dev.example.py oparupi/conf/local.py")
+		file_update('oparupi/conf/local.py', lambda x: text_template(x,{'djangokey':str(uuid4())}))
 		local("python manage.py syncdb")
 		local("python manage.py migrate")
 		local("python manage.py loaddata db/posts.json")
 		local("python manage.py loaddata db/tags.json")
-		local("cp oparupi/conf/local.dev.example.py oparupi/conf/local.py")
-		mode_local()
-		file_update('oparupi/conf/local.py', lambda x: text_template(x,{'djangokey':str(uuid4())}))
-
 
 def deploy():
 	pass
