@@ -1,6 +1,10 @@
 from contextlib import contextmanager
 from fabric.api import env, run
 from fabric.context_managers import prefix
+from cuisine import file_exists, file_update
+from cuisine import mode_local
+from cuisine import text_template 
+from uuid import uuid4
 
 env.venv_script = "source venv/bin/activate"
 
@@ -27,6 +31,10 @@ def setup():
 		local("python manage.py migrate")
 		local("python manage.py loaddata db/posts.json")
 		local("python manage.py loaddata db/tags.json")
+		local("cp oparupi/conf/local.dev.example.py oparupi/conf/local.py")
+		mode_local()
+		file_update('oparupi/conf/local.py', lambda x: text_template(x,{'djangokey':str(uuid4())}))
+
 
 def deploy():
 	pass

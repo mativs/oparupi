@@ -10,4 +10,4 @@ DATABASES = {
         }
 }
 
-SECRET_KEY = '<random-key>'
+SECRET_KEY = '${djangokey}'
