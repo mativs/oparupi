@@ -52,8 +52,10 @@ def deploy():
     # Ensure dependencies
     package_ensure('git')
     package_ensure('python-dev')
+    package_ensure('libpq-dev')
     package_ensure('python-pip')
     package_ensure('python-virtualenv')
+
 
     # Postgres
     package_ensure('postgresql')
@@ -73,6 +75,7 @@ def deploy():
     with cd(env.project_path):
         run("virtualenv --no-site-packages --distribute venv")      
         with prefix(env.venv_script):
+            python_package_ensure('psycopg2')
             run("pip install -r requirements.txt")
             run("pip install gunicorn")
             run("cp oparupi/conf/templates/local.prod.py oparupi/conf/local.py")
