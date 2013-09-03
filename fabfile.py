@@ -47,19 +47,20 @@ def deploy():
 
     # Update system
     # package_upgrade()
-    package_clean_apt('git')
+    package_clean('git')
+    package_update()
 
     # Ensure dependencies
-    package_ensure('git')
-    package_ensure('python-dev')
-    package_ensure('libpq-dev')
-    package_ensure('python-pip')
-    package_ensure('python-virtualenv')
+    package_ensure('git python-dev libpq-dev python-pip python-virtualenv postgresql postgresql-contrib')
+    # package_ensure('python-dev')
+    # package_ensure('libpq-dev')
+    # package_ensure('python-pip')
+    # package_ensure('python-virtualenv')
 
 
     # Postgres
-    package_ensure('postgresql')
-    package_ensure('postgresql-contrib')
+    # package_ensure('postgresql')
+    # package_ensure('postgresql-contrib')
     prompt("Database Password:", key='db_password')
 
     env.db_username = 'oparupi_user'
@@ -75,6 +76,7 @@ def deploy():
     with cd(env.project_path):
         run("virtualenv --no-site-packages --distribute venv")      
         with prefix(env.venv_script):
+            run("git pull origin master")
             python_package_ensure('psycopg2')
             run("pip install -r requirements.txt")
             run("pip install gunicorn")
