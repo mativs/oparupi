@@ -9,6 +9,8 @@ from uuid import uuid4
 
 env.venv_script = "source venv/bin/activate"
 env.git_uri = "https://github.com/mativs/oparupi.git"
+env.project_name = "oparupi"
+env.domain = "oparupi.com"
 
 def local(command, capture=False):
     """ Implementation that handles local mode or run """
@@ -40,53 +42,59 @@ def setup():
         local("python manage.py loaddata db/tags.json")
 
 
-def deploy():
+def deploy(db_password):
     # repository_ensure_apt('ppa:gunicorn/ppa')
     # package_update()
     # package_ensure('gunicorn')
 
-    # Update system
-    # package_upgrade()
+    # Clean and Update 
     package_clean('git')
     package_update()
 
-    # Ensure dependencies
-    package_ensure('git python-dev libpq-dev python-pip python-virtualenv postgresql postgresql-contrib')
-    # package_ensure('python-dev')
-    # package_ensure('libpq-dev')
-    # package_ensure('python-pip')
-    # package_ensure('python-virtualenv')
-
-
-    # Postgres
-    # package_ensure('postgresql')
-    # package_ensure('postgresql-contrib')
-    prompt("Database Password:", key='db_password')
-
+    # Database Setup 
+    env.db_password = db_password
     env.db_username = 'oparupi_user'
     env.db_name = 'oparupi_db'
 
     postgresql_role_ensure(env.db_username, env.db_password, createdb=True)
+    package_ensure('postgresql postgresql-contrib')
     postgresql_database_ensure(env.db_name, owner=env.db_username,
         locale='en_US.utf8', template='template0', encoding='UTF8')
-
+    
+    # Source Deploy
+    package_ensure('git')
     if not dir_exists(env.project_path):
         run("git clone %s %s" % (env.git_uri, env.project_path))
+
+    # Source Setup 
+    package_ensure('python-dev libpq-dev python-pip python-virtualenv')
 
     with cd(env.project_path):
         run("virtualenv --no-site-packages --distribute venv")      
         with prefix(env.venv_script):
+
+            # Django Setup
             run("git pull origin master")
-            python_package_ensure('psycopg2')
             run("pip install -r requirements.txt")
-            run("pip install gunicorn")
             run("cp oparupi/conf/templates/local.prod.py oparupi/conf/local.py")
             env.djangokey = str(uuid4())
             file_update('oparupi/conf/local.py', lambda x: text_template(x,env))
+
+            # Database Setup
+            python_package_ensure('psycopg2')
             run("python manage.py syncdb")
             run("python manage.py migrate")
             run("python manage.py loaddata db/posts.json")
             run("python manage.py loaddata db/tags.json")
+
+            # Web Server Setup
+            python_package_ensure('gunicorn setproctitle nginx')
+            package_ensure('supervisor')
+            run("cp oparupi/conf/templates/gunicorn.conf.py oparupi/conf/gunicorn.py")
+            file_update('oparupi/confi/gunicorn.py', lambda x: text_template(x,env))
+
+
+#### Posible places to deploy ###
 
 def vagrant():
     # change from the default user to 'vagrant'

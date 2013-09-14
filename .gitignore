@@ -19,3 +19,6 @@ media
 # Vagrant files
 .vagrant
 
+# Gunicorn
+gunicorn_start
+run
