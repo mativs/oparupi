@@ -56,8 +56,8 @@ def deploy(db_password):
     env.db_username = 'oparupi_user'
     env.db_name = 'oparupi_db'
 
-    postgresql_role_ensure(env.db_username, env.db_password, createdb=True)
     package_ensure('postgresql postgresql-contrib')
+    postgresql_role_ensure(env.db_username, env.db_password, createdb=True)
     postgresql_database_ensure(env.db_name, owner=env.db_username,
         locale='en_US.utf8', template='template0', encoding='UTF8')
     
@@ -88,10 +88,10 @@ def deploy(db_password):
             run("python manage.py loaddata db/tags.json")
 
             # Web Server Setup
-            python_package_ensure('gunicorn setproctitle nginx')
+            python_package_ensure('gunicorn setproctitle')
             package_ensure('supervisor')
             run("cp oparupi/conf/templates/gunicorn.conf.py oparupi/conf/gunicorn.py")
-            file_update('oparupi/confi/gunicorn.py', lambda x: text_template(x,env))
+            file_update('oparupi/conf/gunicorn.py', lambda x: text_template(x,env))
 
 
 #### Posible places to deploy ###
