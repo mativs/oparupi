@@ -60,9 +60,9 @@ def source_deploy():
         run("git clone %s %s" % (env.git_uri, env.project_path))
 
 def source_update():
-    run("git pull origin master")
-    # Source Setup 
     package_ensure('python-dev libpq-dev python-pip python-virtualenv')
+    with cd(env.project_path):
+        run("git pull origin master")
 
 def virtualenv_setup():
     with cd(env.project_path):
@@ -91,8 +91,15 @@ def gunicorn_setup():
         package_ensure('supervisor')
         run("cp oparupi/conf/templates/gunicorn.conf.py oparupi/conf/gunicorn.py")
         file_update('oparupi/conf/gunicorn.py', lambda x: text_template(x,env))
-        run("cp oparupi/conf/templates/supervisor.conf /etc/supervisor/conf.d/oparupi.conf")
-        file_update('/etc/supervisor/conf.d/oparupi.conf', lambda x: text_template(x,env))
+        mode_sudo()
+        with mode_sudo():
+            sudo("cp oparupi/conf/templates/supervisor.conf /etc/supervisor/conf.d/oparupi.conf")
+            file_update('/etc/supervisor/conf.d/oparupi.conf', lambda x: text_template(x,env))
+            sudo("supervisorctl reread")
+            sudo("supervisorctl update")
+
+def status():
+    sudo("supervisorctl status %s" % env.project_name)
 
 def host_clean():
     package_clean('git')
