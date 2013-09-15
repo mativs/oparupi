@@ -9,6 +9,7 @@ venv
 
 # Db
 *.sqlite
+db.json
 
 # Ruby
 *.sass-cache

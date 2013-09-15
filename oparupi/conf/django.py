@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'taggit',
     'sorl.thumbnail',
     'oparupi.posts',
+    'django_extensions',
 )
 
 CACHES = {

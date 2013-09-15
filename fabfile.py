@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-from fabric.api import env, cd
+from fabric.api import env, cd, put
 from fabric.operations import prompt
 from fabric.context_managers import prefix
 from cuisine import * 
@@ -15,6 +15,7 @@ env.project_path = '/home/mativs/oparupi'
 env.djangokey = str(uuid4())
 env.db_username = 'oparupi_user'
 env.db_name = 'oparupi_db'
+
 
 def local(command, capture=False):
     """ Implementation that handles local mode or run """
@@ -71,7 +72,7 @@ def virtualenv_setup():
     with cd(env.project_path):
         run("virtualenv --no-site-packages --distribute venv") 
 
-def django_setup(db_password):
+def django_update(db_password):
     env.db_password = db_password
     with cd(env.project_path), prefix(env.venv_script):
         # Django Setup
@@ -102,11 +103,18 @@ def gunicorn_setup():
 def nginx_setup():
     with cd(env.project_path), prefix(env.venv_script), mode_sudo():
         package_ensure('nginx') 
-        sudo("cp oparupi/conf/templates/nginx.conf /etc/nginx/sites-available/oparupi")
-        file_update('/etc/nginx/sites-available/oparupi', lambda x: text_template(x,env))
-        if not file_exists("/etc/nginx/sites-enabled/oparupi"):
-            sudo("ln -s -t /etc/nginx/sites-enabled /etc/nginx/sites-available/oparupi oparupi")
+        sudo("cp oparupi/conf/templates/nginx.conf /etc/nginx/sites-available/%s", env.project_name)
+        file_update('/etc/nginx/sites-available/%s' % env.project_name, lambda x: text_template(x,env))
+        if not file_exists("/etc/nginx/sites-enabled/%s" % env.project_name):
+            sudo("ln -s -t /etc/nginx/sites-enabled /etc/nginx/sites-available/%s %s" % (
+                env.project_name, env.project_name))
         sudo("service nginx restart")
+
+def restore_database(db_dump_path):
+    put(db_dump_path, "%s/db/db.json" % env.project_path )
+    with cd(env.project_path), prefix(env.venv_script):
+        run("python manage.py reset_db --noinput")
+        run("python manage.py loaddata db/db.json")
 
 
 def status():
@@ -122,9 +130,14 @@ def deploy(db_password):
     python_setup()
     source_deploy()
     virtualenv_setup()
-    django_setup()
+    django_update()
     gunicorn_setup()   
     nginx_setup()
+
+def update(db_password):
+    source_update()
+    django_update(db_password)
+
            
 #### Posible places to deploy ###
 
