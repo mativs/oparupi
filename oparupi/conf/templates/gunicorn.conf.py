@@ -169,7 +169,7 @@ accesslog = '-'
 # A string or None to choose a default of something like 'gunicorn'.
 #
 
-proc_name = ${project_name}
+proc_name = "${project_name}"
 
 #
 # Server hooks
@@ -200,4 +200,5 @@ def pre_exec(server):
 
 def when_ready(server):
     server.log.info("Server is ready. Spwawning workers")
+
 
