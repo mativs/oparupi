@@ -71,7 +71,8 @@ def virtualenv_setup():
     with cd(env.project_path):
         run("virtualenv --no-site-packages --distribute venv") 
 
-def django_setup():
+def django_setup(db_password):
+    env.db_password = db_password
     with cd(env.project_path), prefix(env.venv_script):
         # Django Setup
         run("git pull origin master")
@@ -123,7 +124,8 @@ def deploy(db_password):
     source_deploy()
     virtualenv_setup()
     django_setup()
-    gunicorn_setup()    
+    gunicorn_setup()   
+    nginx_setup()
            
 #### Posible places to deploy ###
 
