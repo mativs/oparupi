@@ -12,6 +12,9 @@ env.git_uri = "https://github.com/mativs/oparupi.git"
 env.project_name = "oparupi"
 env.domain = "oparupi.com"
 env.project_path = '/home/mativs/oparupi'
+env.djangokey = str(uuid4())
+env.db_username = 'oparupi_user'
+env.db_name = 'oparupi_db'
 
 def local(command, capture=False):
     """ Implementation that handles local mode or run """
@@ -45,9 +48,6 @@ def setup():
 def database_setup(db_password):
     """ Setup Database on host """
     env.db_password = db_password
-    env.db_username = 'oparupi_user'
-    env.db_name = 'oparupi_db'
-
     package_ensure('postgresql postgresql-contrib')
     postgresql_role_ensure(env.db_username, env.db_password, createdb=True)
     postgresql_database_ensure(env.db_name, owner=env.db_username,
@@ -77,7 +77,6 @@ def django_setup():
         run("git pull origin master")
         run("pip install -r requirements.txt")
         run("cp oparupi/conf/templates/local.prod.py oparupi/conf/local.py")
-        env.djangokey = str(uuid4())
         file_update('oparupi/conf/local.py', lambda x: text_template(x,env))
 
         python_package_ensure('psycopg2')
