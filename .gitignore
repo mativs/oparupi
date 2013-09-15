@@ -13,8 +13,9 @@ venv
 # Ruby
 *.sass-cache
 
-# Media files
+# Media and Static files
 media
+static
 
 # Vagrant files
 .vagrant

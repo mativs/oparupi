@@ -21,29 +21,29 @@ def local(command, capture=False):
     from fabric import api
     return api.local(command, shell="/bin/bash", capture=capture)
 
-def compass():
-    """ Script to run compass to watch for changes """
-    with prefix(env.venv_script):
-        local("python manage.py compass watch")
+# def compass():
+#     """ Script to run compass to watch for changes """
+#     with prefix(env.venv_script):
+#         local("python manage.py compass watch")
 
-def runserver():
-    """ Script to run the server width django web server """
-    with prefix(env.venv_script):
-        local("python manage.py runserver")
+# def runserver():
+#     """ Script to run the server width django web server """
+#     with prefix(env.venv_script):
+#         local("python manage.py runserver")
 
-def setup():
-    """ Setup project locally """
-    mode_local()
-    local("virtualenv --no-site-packages --distribute venv")        
-    with prefix(env.venv_script):
-        local("pip install -r requirements.txt")
-        local("cp oparupi/conf/templates/local.dev.py oparupi/conf/local.py")
-        env.djangokey = str(uuid4())
-        file_update('oparupi/conf/local.py', lambda x: text_template(x,env))
-        local("python manage.py syncdb")
-        local("python manage.py migrate")
-        local("python manage.py loaddata db/posts.json")
-        local("python manage.py loaddata db/tags.json")
+# def setup():
+#     """ Setup project locally """
+#     mode_local()
+#     local("virtualenv --no-site-packages --distribute venv")        
+#     with prefix(env.venv_script):
+#         local("pip install -r requirements.txt")
+#         local("cp oparupi/conf/templates/local.dev.py oparupi/conf/local.py")
+#         env.djangokey = str(uuid4())
+#         file_update('oparupi/conf/local.py', lambda x: text_template(x,env))
+#         local("python manage.py syncdb")
+#         local("python manage.py migrate")
+#         local("python manage.py loaddata db/posts.json")
+#         local("python manage.py loaddata db/tags.json")
 
 def database_setup(db_password):
     """ Setup Database on host """
@@ -81,12 +81,9 @@ def django_setup(db_password):
         file_update('oparupi/conf/local.py', lambda x: text_template(x,env))
 
         python_package_ensure('psycopg2')
-        run("python manage.py syncdb")
+        run("python manage.py syncdb --noinput")
         run("python manage.py migrate")
-        # run("python manage.py loaddata db/posts.json")
-        # run("python manage.py loaddata db/tags.json")
-
-        run("python manage.py collectstatic")
+        run("python manage.py collectstatic --noinput")
 
 def gunicorn_setup():
     with cd(env.project_path), prefix(env.venv_script):
