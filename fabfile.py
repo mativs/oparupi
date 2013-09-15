@@ -42,7 +42,7 @@ def setup():
         local("python manage.py loaddata db/posts.json")
         local("python manage.py loaddata db/tags.json")
 
-def setup_database(db_password):
+def database_setup(db_password):
     """ Setup Database on host """
     env.db_password = db_password
     env.db_username = 'oparupi_user'
@@ -53,6 +53,9 @@ def setup_database(db_password):
     postgresql_database_ensure(env.db_name, owner=env.db_username,
         locale='en_US.utf8', template='template0', encoding='UTF8')
 
+def python_setup():
+    package_ensure('python-dev libpq-dev python-pip python-virtualenv')
+
 def source_deploy():
     """ Deploy project source on host """
     package_ensure('git')
@@ -60,7 +63,7 @@ def source_deploy():
         run("git clone %s %s" % (env.git_uri, env.project_path))
 
 def source_update():
-    package_ensure('python-dev libpq-dev python-pip python-virtualenv')
+    package_ensure('git')
     with cd(env.project_path):
         run("git pull origin master")
 
@@ -77,13 +80,13 @@ def django_setup():
         env.djangokey = str(uuid4())
         file_update('oparupi/conf/local.py', lambda x: text_template(x,env))
 
-def database_setup():
-    with cd(env.project_path), prefix(env.venv_script):
         python_package_ensure('psycopg2')
         run("python manage.py syncdb")
         run("python manage.py migrate")
         # run("python manage.py loaddata db/posts.json")
         # run("python manage.py loaddata db/tags.json")
+
+        run("python manage.py collectstatic")
 
 def gunicorn_setup():
     with cd(env.project_path), prefix(env.venv_script):
@@ -91,12 +94,21 @@ def gunicorn_setup():
         package_ensure('supervisor')
         run("cp oparupi/conf/templates/gunicorn.conf.py oparupi/conf/gunicorn.py")
         file_update('oparupi/conf/gunicorn.py', lambda x: text_template(x,env))
-        mode_sudo()
+        dir_ensure('%s/logs' % env.project_path)
+        dir_ensure('%s/run' % env.project_path)
         with mode_sudo():
             sudo("cp oparupi/conf/templates/supervisor.conf /etc/supervisor/conf.d/oparupi.conf")
             file_update('/etc/supervisor/conf.d/oparupi.conf', lambda x: text_template(x,env))
             sudo("supervisorctl reread")
             sudo("supervisorctl update")
+
+def nginx_setup():
+    with cd(env.project_path), prefix(env.venv_script), mode_sudo():
+        package_ensure('nginx') 
+        sudo("cp oparupi/conf/templates/nginx.conf /etc/nginx/sites-available/oparupi")
+        file_update('/etc/nginx/sites-available/oparupi', lambda x: text_template(x,env))
+        sudo("ln -s -t /etc/nginx/sites-enabled /etc/nginx/sites-available/oparupi oparupi")
+
 
 def status():
     sudo("supervisorctl status %s" % env.project_name)
@@ -107,15 +119,12 @@ def host_clean():
 
 def deploy(db_password):
     host_clean()
-    host_update()
-    setup_database(db_password)
+    database_setup(db_password)
+    python_setup()
     source_deploy()
     virtualenv_setup()
     django_setup()
     gunicorn_setup()    
-    
-    
-
            
 #### Posible places to deploy ###
 
@@ -126,9 +135,12 @@ def vagrant():
     env.hosts = ['127.0.0.1:2222']
     # vagrant project path
     env.project_path = '/home/vagrant/oparupi'
+    # start vagrant
+    local("vagrant up")
     # use vagrant ssh key
     result = local('vagrant ssh-config | grep IdentityFile', capture=True)
     env.key_filename = result.split()[1]
+    # set local domain
     env.domain = '0.0.0.0:80'
 
 def prod():

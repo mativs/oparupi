@@ -22,3 +22,6 @@ media
 # Gunicorn
 gunicorn_start
 run
+
+# Logs
+logs
