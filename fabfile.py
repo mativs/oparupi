@@ -4,6 +4,7 @@ from fabric.operations import prompt
 from fabric.context_managers import prefix
 from cuisine import * 
 from cuisine_postgresql import * 
+from cuisine_postgresql import run_as_postgres
 from uuid import uuid4
 
 
@@ -16,11 +17,18 @@ env.djangokey = str(uuid4())
 env.db_username = 'oparupi_user'
 env.db_name = 'oparupi_db'
 
+##### Help methods ####
 
 def local(command, capture=False):
     """ Implementation that handles local mode or run """
     from fabric import api
     return api.local(command, shell="/bin/bash", capture=capture)
+
+def postgresql_database_drop(database_name):
+    cmd = 'dropdb -U postgres {database_name}'.format(
+        database_name=database_name,
+    )
+    run_as_postgres(cmd)
 
 # def compass():
 #     """ Script to run compass to watch for changes """
@@ -81,10 +89,14 @@ def django_update(db_password):
         run("cp oparupi/conf/templates/local.prod.py oparupi/conf/local.py")
         file_update('oparupi/conf/local.py', lambda x: text_template(x,env))
 
+        django_database_update()
+
+        run("python manage.py collectstatic --noinput")
+
+def django_database_update():
         python_package_ensure('psycopg2')
         run("python manage.py syncdb --noinput")
         run("python manage.py migrate")
-        run("python manage.py collectstatic --noinput")
 
 def gunicorn_setup():
     with cd(env.project_path), prefix(env.venv_script):
@@ -110,10 +122,12 @@ def nginx_setup():
                 env.project_name, env.project_name))
         sudo("service nginx restart")
 
-def restore_database(db_dump_path):
+def restore_database(db_dump_path,db_password):
     put(db_dump_path, "%s/db/db.json" % env.project_path )
+    postgresql_database_drop(env.db_name)
+    database_setup(db_password)
     with cd(env.project_path), prefix(env.venv_script):
-        run("python manage.py reset_db --noinput")
+        django_database_update()
         run("python manage.py loaddata db/db.json")
 
 
@@ -130,7 +144,7 @@ def deploy(db_password):
     python_setup()
     source_deploy()
     virtualenv_setup()
-    django_update()
+    django_update(db_password)
     gunicorn_setup()   
     nginx_setup()
 
