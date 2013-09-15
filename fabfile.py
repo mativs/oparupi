@@ -10,7 +10,7 @@ from uuid import uuid4
 env.venv_script = "source venv/bin/activate"
 env.git_uri = "https://github.com/mativs/oparupi.git"
 env.project_name = "oparupi"
-env.domain = "oparupi.com"
+env.project_domain = "oparupi.com"
 env.project_path = '/home/mativs/oparupi'
 env.djangokey = str(uuid4())
 env.db_username = 'oparupi_user'
@@ -107,7 +107,9 @@ def nginx_setup():
         package_ensure('nginx') 
         sudo("cp oparupi/conf/templates/nginx.conf /etc/nginx/sites-available/oparupi")
         file_update('/etc/nginx/sites-available/oparupi', lambda x: text_template(x,env))
-        sudo("ln -s -t /etc/nginx/sites-enabled /etc/nginx/sites-available/oparupi oparupi")
+        if not file_exists("/etc/nginx/sites-enabled/oparupi"):
+            sudo("ln -s -t /etc/nginx/sites-enabled /etc/nginx/sites-available/oparupi oparupi")
+        sudo("service nginx restart")
 
 
 def status():
