@@ -106,6 +106,7 @@ def vagrant():
     # use vagrant ssh key
     result = local('vagrant ssh-config | grep IdentityFile', capture=True)
     env.key_filename = result.split()[1]
+    env.domain = '127.0.0.1:80'
 
 def prod():
     env.project_path = '/var/www/oparupi'
