@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 from fabric.api import env, cd, put
+from fabric.utils import puts
 from fabric.operations import prompt
 from fabric.context_managers import prefix
 from cuisine import * 
@@ -54,13 +55,23 @@ def postgresql_database_drop(database_name):
 #         local("python manage.py loaddata db/posts.json")
 #         local("python manage.py loaddata db/tags.json")
 
+def database_create():
+    postgresql_database_ensure(env.db_name, owner=env.db_username,
+        locale='en_US.utf8', template='template0', encoding='UTF8')
+
 def database_setup(db_password):
     """ Setup Database on host """
     env.db_password = db_password
     package_ensure('postgresql postgresql-contrib')
     postgresql_role_ensure(env.db_username, env.db_password, createdb=True)
-    postgresql_database_ensure(env.db_name, owner=env.db_username,
-        locale='en_US.utf8', template='template0', encoding='UTF8')
+    database_create()
+
+def django_database_setup():
+    with cd(env.project_path), prefix(env.venv_script):
+        python_package_ensure('psycopg2')
+        run("python manage.py syncdb --noinput")
+        run("python manage.py migrate")
+        run("python manage.py createcachetable %s_cache" % (env.project_name))
 
 def python_setup():
     package_ensure('python-dev libpq-dev python-pip python-virtualenv')
@@ -83,18 +94,11 @@ def virtualenv_setup():
 def django_update(db_password):
     env.db_password = db_password
     with cd(env.project_path), prefix(env.venv_script):
-        # Django Setup
         run("git pull origin master")
         run("pip install -r requirements.txt")
         run("cp oparupi/conf/templates/local.prod.py oparupi/conf/local.py")
         file_update('oparupi/conf/local.py', lambda x: text_template(x,env))
-
-        django_database_update()
-
         run("python manage.py collectstatic --noinput")
-
-def django_database_update():
-        python_package_ensure('psycopg2')
         run("python manage.py syncdb --noinput")
         run("python manage.py migrate")
 
@@ -122,12 +126,13 @@ def nginx_setup():
                 env.project_name, env.project_name))
         sudo("service nginx restart")
 
-def restore_database(db_dump_path,db_password):
+def restore_database(db_dump_path):
     put(db_dump_path, "%s/db/db.json" % env.project_path )
-    postgresql_database_drop(env.db_name)
-    database_setup(db_password)
+    if postgresql_database_check(env.db_name):
+        postgresql_database_drop(env.db_name)
+    database_create()
+    django_database_setup()
     with cd(env.project_path), prefix(env.venv_script):
-        django_database_update()
         run("python manage.py loaddata db/db.json")
 
 
@@ -145,6 +150,7 @@ def deploy(db_password):
     source_deploy()
     virtualenv_setup()
     django_update(db_password)
+    django_database_setup()
     gunicorn_setup()   
     nginx_setup()
 
