@@ -95,12 +95,13 @@ def django_update(db_password):
     env.db_password = db_password
     with cd(env.project_path), prefix(env.venv_script):
         run("git pull origin master")
+        python_package_ensure('psycopg2')
         run("pip install -r requirements.txt")
         run("cp oparupi/conf/templates/local.prod.py oparupi/conf/local.py")
         file_update('oparupi/conf/local.py', lambda x: text_template(x,env))
-        run("python manage.py collectstatic --noinput")
         run("python manage.py syncdb --noinput")
         run("python manage.py migrate")
+        run("python manage.py collectstatic --noinput")
 
 def gunicorn_setup():
     with cd(env.project_path), prefix(env.venv_script):
@@ -119,7 +120,7 @@ def gunicorn_setup():
 def nginx_setup():
     with cd(env.project_path), prefix(env.venv_script), mode_sudo():
         package_ensure('nginx') 
-        sudo("cp oparupi/conf/templates/nginx.conf /etc/nginx/sites-available/%s", env.project_name)
+        sudo("cp oparupi/conf/templates/nginx.conf /etc/nginx/sites-available/%s" % env.project_name)
         file_update('/etc/nginx/sites-available/%s' % env.project_name, lambda x: text_template(x,env))
         if not file_exists("/etc/nginx/sites-enabled/%s" % env.project_name):
             sudo("ln -s -t /etc/nginx/sites-enabled /etc/nginx/sites-available/%s %s" % (
