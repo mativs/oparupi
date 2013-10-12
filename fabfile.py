@@ -7,7 +7,7 @@ from fab.git import git_ensure
 from fab.virtualenv import virtualenv_ensure, virtualenv
 from fab.gunicorn import gunicorn_ensure, gunicorn_supervisor_ensure
 from fab.nginx import nginx_ensure
-from fab.django import django_config_ensure, django_static_ensure, django_database_ensure
+from fab.django import django_config_ensure, django_static_ensure, django_database_ensure, django_dbpassword_get
 from fab.postgresql import postgresql_ensure
 from uuid import uuid4
 import os
@@ -28,9 +28,9 @@ env.project_nginx_template = 'oparupi/conf/templates/nginx.conf'
 env.system_dependencies = 'libpq-dev'
 env.supervisor_config = '/etc/supervisor/conf.d/oparupi.conf'
 env.djangokey = str(uuid4())
-env.db_password = str(uuid4())
-env.db_username = 'oparupi_user'
-env.db_name = 'oparupi_db'
+env.db_password = ''
+env.db_username = 'oparupi_db_user'
+env.db_name = 'oparupi_db_name'
 
 def compass():
     with prefix(env.venv_script):
@@ -60,6 +60,7 @@ def database_restore(db_dump_path):
 def project_ensure():
     git_ensure(env.project_path, env.git_uri, env.git_branch)
     virtualenv_ensure(env.project_path, env.system_dependencies)
+    env.db_password = django_dbpassword_get(env.project_path, env.project_config_path)
     django_config_ensure(env.project_path,
         env.project_config_template % env.environment,
         env.project_config_path)
@@ -81,8 +82,8 @@ def database_ensure():
     postgresql_ensure(
         env.db_name,
         env.db_username,
-        env.db_password,
-        env.project_path
+        env.project_path,
+        env.db_password
     )
     django_database_ensure(env.project_path)
 
@@ -100,8 +101,8 @@ def host_clean():
 def setup():
     host_clean()
     project_ensure()
-    web_server_ensure()
     database_ensure()
+    web_server_ensure()
     static_ensure()
 
 ##_gunicorn_templateo deploy ###
@@ -115,7 +116,7 @@ def vagrant():
     # environment
     env.environment = 'prod'
     # set local domain
-    env.domain = '0.0.0.0:80'
+    env.project_domain = '0.0.0.0:80'
     # set database dependencies
     env.database_dependencies = 'postgresql postgresql-contrib'
     # start vagrant
@@ -128,6 +129,6 @@ def vagrant():
 def dev():
     env.project_path = '.'
     env.environment = 'dev'
-    env.domain = 'localhost'
+    env.project_domain = 'localhost'
     env.database_dependencies = ''
     mode_local()
