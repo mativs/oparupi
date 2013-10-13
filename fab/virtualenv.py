@@ -5,7 +5,6 @@ from contextlib import contextmanager
 
 @contextmanager
 def virtualenv(path, venv_path='venv'):
-    print 'este es el %s' % path
     with cd(path), prefix('source %s/bin/activate' % venv_path):
         yield
 

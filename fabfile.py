@@ -7,7 +7,7 @@ from fab.git import git_ensure
 from fab.virtualenv import virtualenv_ensure, virtualenv
 from fab.gunicorn import gunicorn_ensure, gunicorn_supervisor_ensure
 from fab.nginx import nginx_ensure
-from fab.django import django_config_ensure, django_static_ensure, django_database_ensure, django_dbpassword_get
+from fab.django import django_config_ensure, django_static_ensure, django_database_ensure
 from fab.postgresql import postgresql_ensure
 from uuid import uuid4
 import os
@@ -28,7 +28,7 @@ env.project_nginx_template = 'oparupi/conf/templates/nginx.conf'
 env.system_dependencies = 'libpq-dev'
 env.supervisor_config = '/etc/supervisor/conf.d/oparupi.conf'
 env.djangokey = str(uuid4())
-env.db_password = ''
+env.db_password = str(uuid4()) 
 env.db_username = 'oparupi_db_user'
 env.db_name = 'oparupi_db_name'
 
@@ -60,10 +60,16 @@ def database_restore(db_dump_path):
 def project_ensure():
     git_ensure(env.project_path, env.git_uri, env.git_branch)
     virtualenv_ensure(env.project_path, env.system_dependencies)
-    env.db_password = django_dbpassword_get(env.project_path, env.project_config_path)
     django_config_ensure(env.project_path,
         env.project_config_template % env.environment,
         env.project_config_path)
+    postgresql_ensure(
+        env.db_name,
+        env.db_username,
+        env.project_path,
+        env.db_password
+    )
+    django_database_ensure(env.project_path)
 
 def web_server_ensure():
     gunicorn_ensure(env.project_path, 
@@ -77,15 +83,6 @@ def web_server_ensure():
     nginx_ensure(env.project_name, 
         os.path.join(env.project_path, env.project_nginx_template)
         )
-
-def database_ensure():
-    postgresql_ensure(
-        env.db_name,
-        env.db_username,
-        env.project_path,
-        env.db_password
-    )
-    django_database_ensure(env.project_path)
 
 def static_ensure():
     django_static_ensure(env.project_path)
@@ -101,7 +98,6 @@ def host_clean():
 def setup():
     host_clean()
     project_ensure()
-    database_ensure()
     web_server_ensure()
     static_ensure()
 

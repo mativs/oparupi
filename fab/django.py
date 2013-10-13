@@ -2,20 +2,8 @@ from fab.virtualenv import virtualenv
 from cuisine import file_update, text_template
 from cuisine import cd, run,file_write, file_exists, file_read
 from fabric.api import env
-from uuid import uuid4
 
 import re
-
-PASSWORD_PATTERN = "\'PASSWORD\'\:[ ]*\'(.*)\'"
-
-def django_dbpassword_get(path, config):
-    with cd(path):
-    	password = str(uuid4())
-    	if file_exists(config):
-    		matches = re.findall(PASSWORD_PATTERN, file_read(config))
-    		if len(matches) > 0 and len(matches[0].strip()) > 0:
-    			password = matches[0]
-    	return password
 
 def django_config_ensure(path, template, config, db_password_path='db_password'):
     with cd(path):
