@@ -3,6 +3,7 @@ from fab.cuisine_postgresql import postgresql_database_check
 from fab.postgresql import postgresql_database_drop
 from cuisine import mode_local, is_remote
 from cuisine import run
+from cuisine import user_ensure
 from cuisine import package_clean, package_update
 from cuisine import dir_ensure
 from fab import local
@@ -16,6 +17,7 @@ from uuid import uuid4
 import os
 
  # change from the default user to 'vagrant'
+env.user = 'mativs'
 env.venv_script = "source venv/bin/activate"
 env.environment = 'dev'
 env.system_dependencies = 'libpq-dev'
@@ -69,8 +71,8 @@ def status():
     sudo("supervisorctl status %s" % env.project_name)
 
 def deploy():
-    
-
+    package_clean('git')
+    package_update()
     git_ensure(env.project_path, env.git_uri, env.git_branch)
     virtualenv_ensure(env.project_path, env.system_dependencies)
     django_config_ensure(env.project_path,
@@ -117,12 +119,11 @@ def vagrant():
     env.key_filename = result.split()[1]
     # clean vagrant iso
     """ Clean old git in ubuntu 12.04 """
-    package_clean('git')
-    package_update()
 
 def prod():
-    env.user = 'root'
+    env.user = 'mativs'
     env.hosts = ['oparupi.com']
-    env.project_path = '/root/oparupi'
+    env.project_path = '/home/mativs/oparupi'
     env.environment = 'prod'
     env.project_domain = '*.oparupi.com'
+

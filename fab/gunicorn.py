@@ -22,3 +22,4 @@ def gunicorn_supervisor_ensure(template, config):
         file_update(config, lambda x: text_template(x,env))
         run("supervisorctl reread")
         run("supervisorctl update")
+        run("supervisorctl restart %s" % (env.project_name))
