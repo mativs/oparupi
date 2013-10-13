@@ -1,7 +1,10 @@
-from fabric.api import env
-from cuisine import mode_local
+from fabric.api import env, put, cd
+from fab.cuisine_postgresql import postgresql_database_check
+from fab.postgresql import postgresql_database_drop
+from cuisine import mode_local, is_remote
 from cuisine import run
 from cuisine import package_clean, package_update
+from cuisine import dir_ensure
 from fab import local
 from fab.git import git_ensure
 from fab.virtualenv import virtualenv_ensure, virtualenv
@@ -25,6 +28,8 @@ env.project_gunicorn_template = 'oparupi/conf/templates/gunicorn.conf.py'
 env.project_gunicorn_config = 'oparupi/conf/gunicorn.py'
 env.project_supervisor_template = 'oparupi/conf/templates/supervisor.conf'
 env.project_nginx_template = 'oparupi/conf/templates/nginx.conf'
+env.project_sqlite_path = 'oparupi/db.sqlite'
+env.project_dump_path = "db/"
 env.system_dependencies = 'libpq-dev'
 env.supervisor_config = '/etc/supervisor/conf.d/oparupi.conf'
 env.djangokey = str(uuid4())
@@ -41,20 +46,27 @@ def runserver():
     with prefix(env.venv_script):
         local("python manage.py runserver")
 
-def database_setup():
-    with virtualenv(env.project_path):
-        run("python manage.py syncdb --noinput")
-        run("python manage.py migrate")
-
 def database_restore(db_dump_path):
     """ Set database to dump state """
+    with cd(env.project_path):
+        dir_ensure(env.project_dump_path)
     if is_remote():
         if postgresql_database_check(env.db_name):
             postgresql_database_drop(env.db_name)
-        postgresql_ensure(env.project_path)
-    database_setup()
-    put(db_dump_path, "%s/db/db.json" % env.project_path )
-    with cd(env.project_path), prefix(env.venv_script):
+        postgresql_ensure(
+            env.db_name,
+            env.db_username,
+            env.project_path,
+            env.db_password
+        )
+        with cd(env.project_path):
+            put(db_dump_path, env.project_dump_path)
+    else:
+        with cd(env.project_path):
+            local('rm %s' % env.project_sqlite_path)
+            local('cp %s %s' % (db_dump_path, env.project_dump_path ))
+    django_database_ensure(env.project_path )
+    with virtualenv(env.project_path):
         run("python manage.py loaddata db/db.json")
 
 def project_ensure():
@@ -63,12 +75,14 @@ def project_ensure():
     django_config_ensure(env.project_path,
         env.project_config_template % env.environment,
         env.project_config_path)
-    postgresql_ensure(
-        env.db_name,
-        env.db_username,
-        env.project_path,
-        env.db_password
-    )
+    if is_remote():
+        postgresql_ensure(
+            env.db_name,
+            env.db_username,
+            env.project_path,
+            env.db_password,
+            update_password=True
+        )
     django_database_ensure(env.project_path)
 
 def web_server_ensure():
