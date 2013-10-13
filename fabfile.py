@@ -46,7 +46,7 @@ def runserver():
     with prefix(env.venv_script):
         local("python manage.py runserver")
 
-def database_restore(db_dump_path):
+def restore(db_dump_path):
     """ Set database to dump state """
     with cd(env.project_path):
         dir_ensure(env.project_dump_path)
@@ -75,14 +75,13 @@ def project_ensure():
     django_config_ensure(env.project_path,
         env.project_config_template % env.environment,
         env.project_config_path)
-    if is_remote():
-        postgresql_ensure(
-            env.db_name,
-            env.db_username,
-            env.project_path,
-            env.db_password,
-            update_password=True
-        )
+    postgresql_ensure(
+        env.db_name,
+        env.db_username,
+        env.project_path,
+        env.db_password,
+        update_password=True
+    )
     django_database_ensure(env.project_path)
 
 def web_server_ensure():
@@ -139,6 +138,5 @@ def vagrant():
 def dev():
     env.project_path = '.'
     env.environment = 'dev'
-    env.project_domain = 'localhost'
     env.database_dependencies = ''
     mode_local()

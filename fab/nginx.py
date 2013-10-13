@@ -1,5 +1,5 @@
 from cuisine import package_ensure
-from cuisine import file_update, file_exists
+from cuisine import file_update, file_exists, file_unlink
 from cuisine import text_template
 from cuisine import mode_sudo, run
 from fabric.api import env
@@ -12,4 +12,5 @@ def nginx_ensure(name, template):
 	    if not file_exists("/etc/nginx/sites-enabled/%s" % name):
 	        run("ln -s -t /etc/nginx/sites-enabled /etc/nginx/sites-available/%s " % (
 	            env.project_name))
+	    file_unlink('/etc/nginx/sites-enabled/default')
 	    run("service nginx restart")
