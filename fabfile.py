@@ -52,21 +52,15 @@ def restore(db_dump_path):
     """ Set database to dump state """
     with cd(env.project_path):
         dir_ensure(env.project_dump_path)
-    if is_remote():
-        if postgresql_database_check(env.db_name):
-            postgresql_database_drop(env.db_name)
-        postgresql_ensure(
-            env.db_name,
-            env.db_username,
-            env.project_path,
-            env.db_password
-        )
-        with cd(env.project_path):
-            put(db_dump_path, env.project_dump_path)
-    else:
-        with cd(env.project_path):
-            local('rm %s' % env.project_sqlite_path)
-            local('cp %s %s' % (db_dump_path, env.project_dump_path ))
+        put(db_dump_path, env.project_dump_path)
+    if postgresql_database_check(env.db_name):
+        postgresql_database_drop(env.db_name)
+    postgresql_ensure(
+        env.db_name,
+        env.db_username,
+        env.project_path,
+        env.db_password
+    )   
     django_database_ensure(env.project_path )
     with virtualenv(env.project_path):
         run("python manage.py loaddata db/db.json")
@@ -75,9 +69,7 @@ def status():
     sudo("supervisorctl status %s" % env.project_name)
 
 def deploy():
-    """ Clean old git in ubuntu 12.04 """
-    package_clean('git')
-    package_update()
+    
 
     git_ensure(env.project_path, env.git_uri, env.git_branch)
     virtualenv_ensure(env.project_path, env.system_dependencies)
@@ -124,4 +116,13 @@ def vagrant():
     result = local('vagrant ssh-config | grep IdentityFile', capture=True)
     env.key_filename = result.split()[1]
     # clean vagrant iso
+    """ Clean old git in ubuntu 12.04 """
+    package_clean('git')
+    package_update()
 
+def prod():
+    env.user = 'root'
+    env.hosts = ['oparupi.com']
+    env.project_path = '/root/oparupi'
+    env.environment = 'prod'
+    env.project_domain = '*.oparupi.com'
