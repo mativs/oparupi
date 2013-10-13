@@ -15,12 +15,20 @@ from fab.postgresql import postgresql_ensure
 from uuid import uuid4
 import os
 
+ # change from the default user to 'vagrant'
 env.venv_script = "source venv/bin/activate"
+env.environment = 'dev'
+env.system_dependencies = 'libpq-dev'
+env.supervisor_config = '/etc/supervisor/conf.d/oparupi.conf'
+env.djangokey = str(uuid4())
 env.git_uri = "https://github.com/mativs/oparupi.git"
 env.git_branch = 'master'
+env.db_password = str(uuid4()) 
+env.db_username = 'oparupi_db_user'
+env.db_name = 'oparupi_db_name'
 env.project_name = "oparupi"
 env.project_domain = "oparupi.com"
-env.project_path = '/home/mativs/oparupi'
+env.project_path = '.'
 env.project_dependencies = 'libpq-dev'
 env.project_config_template = 'oparupi/conf/templates/local.%s.py'
 env.project_config_path = 'oparupi/conf/local.py'
@@ -30,12 +38,6 @@ env.project_supervisor_template = 'oparupi/conf/templates/supervisor.conf'
 env.project_nginx_template = 'oparupi/conf/templates/nginx.conf'
 env.project_sqlite_path = 'oparupi/db.sqlite'
 env.project_dump_path = "db/"
-env.system_dependencies = 'libpq-dev'
-env.supervisor_config = '/etc/supervisor/conf.d/oparupi.conf'
-env.djangokey = str(uuid4())
-env.db_password = str(uuid4()) 
-env.db_username = 'oparupi_db_user'
-env.db_name = 'oparupi_db_name'
 
 def compass():
     with prefix(env.venv_script):
@@ -69,7 +71,14 @@ def restore(db_dump_path):
     with virtualenv(env.project_path):
         run("python manage.py loaddata db/db.json")
 
-def project_ensure():
+def status():
+    sudo("supervisorctl status %s" % env.project_name)
+
+def deploy():
+    """ Clean old git in ubuntu 12.04 """
+    package_clean('git')
+    package_update()
+
     git_ensure(env.project_path, env.git_uri, env.git_branch)
     virtualenv_ensure(env.project_path, env.system_dependencies)
     django_config_ensure(env.project_path,
@@ -83,36 +92,19 @@ def project_ensure():
         update_password=True
     )
     django_database_ensure(env.project_path)
-
-def web_server_ensure():
     gunicorn_ensure(env.project_path, 
         os.path.join(env.project_path, env.project_gunicorn_template),
         os.path.join(env.project_path, env.project_gunicorn_config)
-        )
+    )
     gunicorn_supervisor_ensure(
         os.path.join(env.project_path, env.project_supervisor_template),
         env.supervisor_config
-        ) 
+    ) 
     nginx_ensure(env.project_name, 
         os.path.join(env.project_path, env.project_nginx_template)
-        )
-
-def static_ensure():
+    )
     django_static_ensure(env.project_path)
 
-def status():
-    sudo("supervisorctl status %s" % env.project_name)
-
-def host_clean():
-    """ Clean old git in ubuntu 12.04 """
-    package_clean('git')
-    package_update()
-    
-def setup():
-    host_clean()
-    project_ensure()
-    web_server_ensure()
-    static_ensure()
 
 ##_gunicorn_templateo deploy ###
 def vagrant():
@@ -126,8 +118,6 @@ def vagrant():
     env.environment = 'prod'
     # set local domain
     env.project_domain = '0.0.0.0:80'
-    # set database dependencies
-    env.database_dependencies = 'postgresql postgresql-contrib'
     # start vagrant
     local("vagrant up")
     # use vagrant ssh key
@@ -135,8 +125,3 @@ def vagrant():
     env.key_filename = result.split()[1]
     # clean vagrant iso
 
-def dev():
-    env.project_path = '.'
-    env.environment = 'dev'
-    env.database_dependencies = ''
-    mode_local()
