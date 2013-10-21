@@ -93,8 +93,8 @@ def postgresql_role_check(username):
 @require_fabric
 def postgresql_password_change(username, password):
     cmd = 'psql -tAc "alter user {} with password \'{}\'"'
-    #with settings(hide('everything'), warn_only=True):
-    return run_as_postgres(cmd.format(username, password)) == '1'
+    with settings(hide('everything'), warn_only=True):
+        return run_as_postgres(cmd.format(username, password)) == '1'
 
 @require_fabric
 def postgresql_role_create(username,
