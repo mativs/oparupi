@@ -15,3 +15,5 @@ DATABASES = {
 }
 
 SECRET_KEY = '${djangokey}'
+
+DEBUG = False
