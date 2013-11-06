@@ -13,6 +13,7 @@ MANAGERS = ADMINS
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['.oparupi.com']
 
+SECRET_KEY = 'c841f29f-f68b-4f68-81eb-bae1980db051'
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -51,6 +52,6 @@ INSTALLED_APPS = (
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/var/tmp/oparupi_cache',
+        'LOCATION': '/tmp/oparupi_cache',
     }
 }

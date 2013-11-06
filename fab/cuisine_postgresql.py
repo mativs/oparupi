@@ -17,6 +17,7 @@ __all__ = [
     'postgresql_role_check',
     'postgresql_role_create',
     'postgresql_role_ensure',
+    'postgresql_database_check_empty',
 ]
 
 
@@ -42,6 +43,12 @@ def postgresql_database_check(database_name):
     with settings(hide('everything'), warn_only=True):
         return run_as_postgres(cmd.format(database_name)) == '1'
 
+
+@require_fabric
+def postgresql_database_check_empty(database_name):
+    cmd = 'psql -d {} -tAc "\d"'
+    with settings(hide('everything'), warn_only=True):
+        return run_as_postgres(cmd.format(database_name)) == 'No relations found.'
 
 @require_fabric
 def postgresql_database_create(database_name,
@@ -91,12 +98,6 @@ def postgresql_role_check(username):
 
 
 @require_fabric
-def postgresql_password_change(username, password):
-    cmd = 'psql -tAc "alter user {} with password \'{}\'"'
-    with settings(hide('everything'), warn_only=True):
-        return run_as_postgres(cmd.format(username, password)) == '1'
-
-@require_fabric
 def postgresql_role_create(username,
                            password,
                            superuser=False,
@@ -118,20 +119,43 @@ def postgresql_role_create(username,
 
 
 @require_fabric
+def postgresql_role_update(username,
+                           password=None,
+                           superuser=None,
+                           createdb=None,
+                           createrole=None,
+                           inherit=None,
+                           login=None):
+    opts = [
+        '' if superuser is None else 'SUPERUSER' if superuser else 'NOSUPERUSER',
+        '' if createdb is None else 'CREATEDB' if createdb else 'NOCREATEDB',
+        '' if createrole is None else 'CREATEROLE' if createrole else 'NOCREATEROLE',
+        '' if inherit is None else 'INHERIT' if inherit else 'NOINHERIT',
+        '' if login is None else 'LOGIN' if login else 'NOLOGIN',
+        '' if password is None else 'PASSWORD \'{password}\''.format(password=password)
+    ]
+    sql = 'ALTER ROLE {username} WITH {opts} '
+    sql = sql.format(username=username, opts=' '.join(opts))
+    cmd = 'psql -c "{0}"'.format(sql)
+    return run_as_postgres(cmd) 
+
+@require_fabric
 def postgresql_role_ensure(username,
                            password,
                            superuser=False,
                            createdb=False,
                            createrole=False,
                            inherit=True,
-                           login=True,
-                           update_password=False):
+                           login=True):
     if postgresql_role_check(username):
-        if update_password:
-          puts('Role "{0}" exists. Updating password...'.format(username))
-          postgresql_password_change(username, password)
-        else:
-          puts('Role "{0}" exists.'.format(username))
+        puts('Role "{0}" exists. Updating attributes ...'.format(username))
+        postgresql_role_update(username,
+                               password,
+                               superuser,
+                               createdb,
+                               createrole,
+                               inherit,
+                               login)
     else:
         puts('Role "{0}" doesn\'t exist. Creating...'.format(username))
         postgresql_role_create(username,
