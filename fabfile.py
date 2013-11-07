@@ -36,7 +36,8 @@ env.project_gunicorn_config = 'oparupi/conf/gunicorn.py'
 env.project_supervisor_template = 'oparupi/conf/templates/supervisor.conf'
 env.project_nginx_template = 'oparupi/conf/templates/nginx.conf'
 env.project_sqlite_path = 'oparupi/db.sqlite'
-env.project_media_path = "media"
+env.project_local_media_path = "oparupi/media"
+env.project_remote_media_path = "media"
 
 @task
 def enable_debug():
@@ -53,7 +54,10 @@ def pulldata():
     local("rm -f %s" % env.project_sqlite_path)
     django_database_local_setup(env.project_name)
     django_database_pull(env.project_path)
-    django_media_pull(env.project_path, env.project_media_path)
+    django_media_pull(env.project_path,
+        env.project_local_media_path, 
+        env.project_remote_media_path
+    )
 
 @task
 def pushdata():
@@ -65,7 +69,8 @@ def pushdata():
         env.project_config_template % env.environment,
         env.project_config_path)
     django_media_push(env.project_path,
-        env.project_media_path)
+        env.project_local_media_path,
+        env.project_remote_media_path)
     gunicorn_supervisor_restart(env.project_name)
 
 @task

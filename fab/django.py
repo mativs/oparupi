@@ -58,7 +58,7 @@ def django_database_local_setup(project_name):
     local("python manage.py syncdb --noinput")
     local("python manage.py migrate")
 
-def django_media_pull(project_path, media_path):
+def django_media_pull(project_path, local_media_path, remote_media_path):
     """ Overwrite local media files with remote ones """
     with cd(project_path), cd(media_path):
         run('tar -czf /tmp/media.tar.gz *')
@@ -67,14 +67,14 @@ def django_media_pull(project_path, media_path):
     local("rm -rf %s/*" % (media_path))
     local("tar -xf /tmp/media.tar.gz -C %s" % (media_path)) 
 
-def django_media_push(project_path, media_path):
-    with lcd(media_path):
+def django_media_push(project_path, local_media_path, remote_media_path):
+    with lcd(local_media_path):
         local('tar -czf /tmp/media.tar.gz *')
     put('/tmp/media.tar.gz', '/tmp/media.tar.gz')
     
     with cd(project_path):
-        run("mkdir -p %s" % (media_path)) 
-        with cd(media_path):
+        run("mkdir -p %s" % (remote_media_path)) 
+        with cd(remote_media_path):
             run("rm -rf *")
             run("tar -xf /tmp/media.tar.gz") 
 
