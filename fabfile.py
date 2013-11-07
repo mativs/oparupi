@@ -7,6 +7,7 @@ from fab.git import git_ensure
 from fab.django import django_config_ensure, django_static_ensure
 from fab.django import django_database_ensure, django_database_pull, django_database_push
 from fab.django import django_database_local_setup, django_media_pull, django_media_push
+from fab.django import django_disable_debug_mode, django_enable_debug_mode
 from fab.postgresql import postgresql_ensure
 from fab.cuisine_postgresql import postgresql_database_check,postgresql_database_check_empty
 from uuid import uuid4
@@ -35,7 +36,16 @@ env.project_gunicorn_config = 'oparupi/conf/gunicorn.py'
 env.project_supervisor_template = 'oparupi/conf/templates/supervisor.conf'
 env.project_nginx_template = 'oparupi/conf/templates/nginx.conf'
 env.project_sqlite_path = 'oparupi/db.sqlite'
-env.project_media_path = "oparupi/media"
+env.project_media_path = "media"
+
+@task
+def enable_debug():
+    django_enable_debug_mode(env.project_path, env.project_config_path)
+    gunicorn_supervisor_restart(env.project_name)
+
+@task
+def disable_debug():
+    django_disable_debug_mode(env.project_path, env.project_config_path)
 
 @task
 def pulldata():
@@ -68,6 +78,10 @@ def deploy():
     django_config_ensure(env.project_path,
         env.project_config_template % env.environment,
         env.project_config_path)
+    django_disable_debug_mode(
+        env.project_path,
+        env.project_config_path
+    )
     postgresql_ensure(
         env.db_name,
         env.db_username,

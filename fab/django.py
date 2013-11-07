@@ -9,10 +9,18 @@ from fab.postgresql import postgresql_database_check, postgresql_database_drop, 
 import re
 import os
 
+def django_enable_debug_mode(project_path, config):
+    with cd(project_path):
+        file_update(config, lambda x: re.sub('DEBUG = \w*', 'DEBUG = True', x) )
+
+def django_disable_debug_mode(project_path, config):
+    with cd(project_path):
+        file_update(config, lambda x: re.sub('DEBUG = \w*', 'DEBUG = False', x) )
+
 def django_config_ensure(path, template, config):
     with cd(path):
         run("cp %s %s" % (template, config))
-        file_update('%s' % config, lambda x: text_template(x,env))
+        file_update(config, lambda x: text_template(x,env))
 
 def django_static_ensure(path, venv_path='venv'):
     with virtualenv(path, venv_path):

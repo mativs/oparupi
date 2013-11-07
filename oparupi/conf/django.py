@@ -11,7 +11,7 @@ MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['.oparupi.com']
+ALLOWED_HOSTS = ['.oparupi.com', 'localhost']
 
 SECRET_KEY = 'c841f29f-f68b-4f68-81eb-bae1980db051'
 
