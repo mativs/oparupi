@@ -12,6 +12,7 @@ def git_ensure(path, uri, branch):
     if not dir_exists(path):
         run("git clone %s %s" % (uri, path))
     with cd(path):
-	    run('git checkout %s' % branch)
-	    run('git pull origin %s' % branch)        
+        run('git checkout .')
+        run('git checkout %s' % branch)
+        run('git pull origin %s' % branch)        
 
