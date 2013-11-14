@@ -9,7 +9,7 @@ from fab.django import django_database_ensure, django_database_pull, django_data
 from fab.django import django_database_local_setup, django_media_pull, django_media_push
 from fab.django import django_disable_debug_mode, django_enable_debug_mode
 from fab.postgresql import postgresql_ensure
-from fab.cuisine_postgresql import postgresql_database_check,postgresql_database_check_empty
+from fab.cuisine_postgresql import postgresql_database_check
 from uuid import uuid4
 import os
 import fab
@@ -142,3 +142,4 @@ def prod():
     env.project_path = '/home/mativs/oparupi'
     env.environment = 'prod'
     env.project_domain = '*.oparupi.com'
+
