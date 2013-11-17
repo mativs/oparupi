@@ -60,12 +60,12 @@ def django_database_local_setup(project_name):
 
 def django_media_pull(project_path, local_media_path, remote_media_path):
     """ Overwrite local media files with remote ones """
-    with cd(project_path), cd(media_path):
+    with cd(project_path), cd(remote_media_path):
         run('tar -czf /tmp/media.tar.gz *')
         get('/tmp/media.tar.gz', '/tmp/media.tar.gz')
-    local("mkdir -p %s" % (media_path)) 
-    local("rm -rf %s/*" % (media_path))
-    local("tar -xf /tmp/media.tar.gz -C %s" % (media_path)) 
+    local("mkdir -p %s" % (local_media_path)) 
+    local("rm -rf %s/*" % (local_media_path))
+    local("tar -xf /tmp/media.tar.gz -C %s" % (local_media_path)) 
 
 def django_media_push(project_path, local_media_path, remote_media_path):
     with lcd(local_media_path):
