@@ -93,8 +93,7 @@ def deploy():
         env.db_name,
         env.db_username,
         env.project_path,
-        env.db_password,
-        update_password=True
+        env.db_password
     )
     django_database_ensure(env.project_path)
     gunicorn_ensure(env.project_path, 
