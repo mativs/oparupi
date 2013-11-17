@@ -36,16 +36,18 @@ env.project_gunicorn_config = 'oparupi/conf/gunicorn.py'
 env.project_supervisor_template = 'oparupi/conf/templates/supervisor.conf'
 env.project_nginx_template = 'oparupi/conf/templates/nginx.conf'
 env.project_sqlite_path = 'oparupi/db.sqlite'
-env.project_local_media_path = "oparupi/media"
+env.project_local_media_path = "media"
 env.project_remote_media_path = "media"
 
 @task
 def enable_debug():
+    """ Enable django debug mode """
     django_enable_debug_mode(env.project_path, env.project_config_path)
-    gunicorn_supervisor_restart(env.project_name)
+    # gunicorn_supervisor_restart(env.project_name)
 
 @task
 def disable_debug():
+    """ Disable django debug mode """
     django_disable_debug_mode(env.project_path, env.project_config_path)
 
 @task
