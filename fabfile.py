@@ -52,7 +52,7 @@ def disable_debug():
 
 @task
 def pulldata():
-    """ Drop and recreate db with remote data and download uploaded files """
+    """ Drop and recreate db with remote data and download media files """
     local("rm -f %s" % env.project_sqlite_path)
     django_database_local_setup(env.project_name)
     django_database_pull(env.project_path)
@@ -63,7 +63,7 @@ def pulldata():
 
 @task
 def pushdata():
-    """ Set database to dump state """
+    """ Drop and recreate remote db with local data and upload media files """
     django_database_push(env.project_path,
         env.db_name,
         env.db_username,
