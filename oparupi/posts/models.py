@@ -34,4 +34,5 @@ class Post(models.Model):
     tags = TaggableManager(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
+    created.editable = True
     updated = models.DateTimeField(auto_now=True)
