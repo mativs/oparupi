@@ -12,8 +12,10 @@ __maintainer__ = u'Atamert \xd6l\xe7gen'
 __email__ = 'muhuk@muhuk.com'
 __all__ = [
     'postgresql_database_check',
+    'postgresql_database_drop',
     'postgresql_database_create',
     'postgresql_database_ensure',
+    'postgresql_database_reset'
     'postgresql_role_check',
     'postgresql_role_create',
     'postgresql_role_ensure',
@@ -86,6 +88,13 @@ def postgresql_database_update(database_name,
             )
         )
 
+@require_fabric
+def postgresql_database_drop(database_name):
+    cmd = 'dropdb -U postgres {database_name}'.format(
+        database_name=database_name,
+    )
+    run_as_postgres(cmd)
+
 
 @require_fabric
 def postgresql_database_create(database_name,
@@ -107,6 +116,23 @@ def postgresql_database_create(database_name,
     )
     run_as_postgres(cmd)
 
+@require_fabric
+def postgresql_database_reset(database_name,
+                              tablespace=None,
+                              locale=None,
+                              encoding=None,
+                              owner=None,
+                              template=None):
+    if postgresql_database_check(database_name):
+        puts('Database "{0}" exists. Droping...'.format(database_name))
+        postgresql_database_drop(database_name)
+    puts('Database "{0}" dropped. Creating...'.format(database_name))
+    postgresql_database_create(database_name,
+                               tablespace,
+                               locale,
+                               encoding,
+                               owner,
+                               template)
 
 @require_fabric
 def postgresql_database_ensure(database_name,
@@ -159,6 +185,27 @@ def postgresql_role_create(username,
 
 
 @require_fabric
+def postgresql_role_update(username,
+                           password=None,
+                           superuser=None,
+                           createdb=None,
+                           createrole=None,
+                           inherit=None,
+                           login=None):
+    opts = [
+        '' if superuser is None else 'SUPERUSER' if superuser else 'NOSUPERUSER',
+        '' if createdb is None else 'CREATEDB' if createdb else 'NOCREATEDB',
+        '' if createrole is None else 'CREATEROLE' if createrole else 'NOCREATEROLE',
+        '' if inherit is None else 'INHERIT' if inherit else 'NOINHERIT',
+        '' if login is None else 'LOGIN' if login else 'NOLOGIN',
+        '' if password is None else 'PASSWORD \'{password}\''.format(password=password)
+    ]
+    sql = 'ALTER ROLE {username} WITH {opts} '
+    sql = sql.format(username=username, opts=' '.join(opts))
+    cmd = 'psql -c "{0}"'.format(sql)
+    return run_as_postgres(cmd) 
+
+@require_fabric
 def postgresql_role_ensure(username,
                            password,
                            superuser=False,
@@ -167,7 +214,14 @@ def postgresql_role_ensure(username,
                            inherit=True,
                            login=True):
     if postgresql_role_check(username):
-        puts('Role "{0}" exists.'.format(username))
+        puts('Role "{0}" exists. Updating attributes ...'.format(username))
+        postgresql_role_update(username,
+                               password,
+                               superuser,
+                               createdb,
+                               createrole,
+                               inherit,
+                               login)
     else:
         puts('Role "{0}" doesn\'t exist. Creating...'.format(username))
         postgresql_role_create(username,
