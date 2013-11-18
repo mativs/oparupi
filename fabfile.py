@@ -38,6 +38,7 @@ env.project_nginx_template = 'oparupi/conf/templates/nginx.conf'
 env.project_sqlite_path = 'oparupi/db.sqlite'
 env.project_local_media_path = "media"
 env.project_remote_media_path = "media"
+env.project_django_packages_not_handled = ['gunicorn', 'psycopg2']
 
 @task
 def enable_debug():
@@ -81,7 +82,8 @@ def deploy():
     package_clean('git')
     package_update()
     git_ensure(env.project_path, env.git_uri, env.git_branch)
-    virtualenv_ensure(env.project_path, env.project_dependencies)
+    virtualenv_ensure(env.project_path, env.project_dependencies, 
+        not_handled=env.project_django_packages_not_handled)
     django_config_ensure(env.project_path,
         env.project_config_template % env.environment,
         env.project_config_path)
