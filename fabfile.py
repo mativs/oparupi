@@ -16,9 +16,8 @@ import fab
 
  # change from the default user to 'vagrant'
 env.user = 'mativs'
-env.venv_script = "source venv/bin/activate"
+env.venv_path = "venv"
 env.environment = 'dev'
-env.supervisor_config = '/etc/supervisor/conf.d/oparupi.conf'
 env.djangokey = str(uuid4())
 env.git_uri = "https://github.com/mativs/oparupi.git"
 env.git_branch = 'master'
@@ -38,7 +37,6 @@ env.project_nginx_template = 'oparupi/conf/templates/nginx.conf'
 env.project_sqlite_path = 'oparupi/db.sqlite'
 env.project_local_media_path = "media"
 env.project_remote_media_path = "media"
-env.project_django_packages_not_handled = ['gunicorn', 'psycopg2']
 
 @task
 def enable_debug():
@@ -82,8 +80,8 @@ def deploy():
     package_clean('git')
     package_update()
     git_ensure(env.project_path, env.git_uri, env.git_branch)
-    virtualenv_ensure(env.project_path, env.project_dependencies, 
-        not_handled=env.project_django_packages_not_handled)
+    package_ensure(env.project_dependencies)
+    virtualenv_ensure(env.project_path, env.venv_path)
     django_config_ensure(env.project_path,
         env.project_config_template % env.environment,
         env.project_config_path)
@@ -95,22 +93,29 @@ def deploy():
         env.db_name,
         env.db_username,
         env.project_path,
-        env.db_password
+        env.db_password,
+        env.venv_path
     )
-    django_database_ensure(env.project_path)
+    django_database_ensure(
+        env.project_path,
+        env.venv_path
+    )
     gunicorn_ensure(env.project_path, 
         os.path.join(env.project_path, env.project_gunicorn_template),
-        os.path.join(env.project_path, env.project_gunicorn_config)
+        os.path.join(env.project_path, env.project_gunicorn_config),
+        env.venv_path
     )
     gunicorn_supervisor_ensure(
         env.project_name,
-        os.path.join(env.project_path, env.project_supervisor_template),
-        env.supervisor_config
+        os.path.join(env.project_path, env.project_supervisor_template)
     ) 
     nginx_ensure(env.project_name, 
         os.path.join(env.project_path, env.project_nginx_template)
     )
-    django_static_ensure(env.project_path)
+    django_static_ensure(
+        env.project_path,
+        env.venv_path
+    )
 
 def status():
     sudo("supervisorctl status %s" % env.project_name)

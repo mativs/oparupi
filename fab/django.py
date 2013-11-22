@@ -22,18 +22,18 @@ def django_config_ensure(path, template, config):
         run("cp %s %s" % (template, config))
         file_update(config, lambda x: text_template(x,env))
 
-def django_static_ensure(path, venv_path='venv'):
+def django_static_ensure(path, venv_path='.venv'):
     with virtualenv(path, venv_path):
         run("python manage.py collectstatic --noinput")
 
-def django_database_ensure(path, venv_path='venv', migration=''):
-	with virtualenv(path):
+def django_database_ensure(path, venv_path='.venv', migration=''):
+	with virtualenv(path, venv_path):
 		run("python manage.py syncdb --noinput")
 		run("python manage.py migrate %s" % migration)
 
-def django_database_pull(project_path):
+def django_database_pull(project_path, venv_path='.venv'):
     """ Dump remote database and load it locally """
-    with virtualenv(project_path):
+    with virtualenv(project_path, venv_path):
         run("python manage.py dumpdata > /tmp/db.json")
         get('/tmp/db.json', '/tmp/db.json')
     local("python manage.py loaddata /tmp/db.json")

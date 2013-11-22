@@ -12,8 +12,8 @@ def postgresql_database_drop(name):
 	cmd = 'dropdb -U postgres {name}'.format(name=name)
 	run_as_postgres(cmd)
 
-def postgresql_ensure(name, username, path, db_password):
-    with virtualenv(path):
+def postgresql_ensure(name, username, path, db_password, venv_path='.venv'):
+    with virtualenv(path, venv_path):
         package_ensure('postgresql postgresql-contrib libpq-dev')
         python_package_ensure('psycopg2')
     postgresql_role_ensure(username, db_password, createdb=True)
