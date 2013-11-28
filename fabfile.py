@@ -54,7 +54,7 @@ def pulldata():
     """ Drop and recreate db with remote data and download media files """
     local("rm -f %s" % env.project_sqlite_path)
     django_database_local_setup(env.project_name)
-    django_database_pull(env.project_path)
+    django_database_pull(env.project_path, env.venv_path)
     django_media_pull(env.project_path,
         env.project_local_media_path, 
         env.project_remote_media_path

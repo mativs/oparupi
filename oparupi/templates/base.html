@@ -2,8 +2,7 @@
 {% load thumbnail %}
 {% load staticfiles %}
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="no-js" lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -11,10 +10,9 @@
   <title>{% block title %}Oparupi{% endblock title  %}</title>
 
   
-  <link rel="stylesheet" href="{% static 'css/app.css' %}">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'stylesheets/app.css' %}" />
   <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
-  <script src="{% static 'js/vendor/custom.modernizr.js' %}"></script>
+  <script src="{% static 'bower_components/modernizr/modernizr.js' %}"></script>
 
 </head>
 <body>
@@ -23,12 +21,11 @@
 	  <div class="row">
 	  	<div class="small-12">
 	      <a href="/" title="Opárupi" class="avatar">
-	      	<img src="{% static 'img/logo.png' %}" alt="Simplist">
+	      	<img src="{% static 'images/logo.png' %}" alt="Simplist">
 	      </a>
 		  </div>
     </div>
 	  {% block header-content %} {% endblock header-content %}		
-	  </div>
 	{% endblock header %}
   </header> 
   {% block content %} {% endblock content %}
@@ -48,27 +45,10 @@
   {% endblock footer %}
   
   {% block javascript %}
-  <script src="{% static 'js/vendor/jquery-1.10.2.min.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.cookie.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.section.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.reveal.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.forms.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.abide.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.joyride.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.tooltips.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.placeholder.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.orbit.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.dropdown.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.topbar.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.magellan.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.clearing.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.interchange.js' %}"></script>
-  <script src="{% static 'js/foundation/foundation.alerts.js' %}"></script>
-  <script>
-  $(document).foundation();
-  </script>
+  <script src="{% static 'bower_components/jquery/jquery.js' %}"></script>
+  <script src="{% static 'bower_components/foundation/js/foundation.min.js' %}"></script>
+  <script src="{% static 'javascripts/app.js' %}"></script>
   {% endblock javascript %}
-  <script src="{% static 'js/oparupi.js' %}"></script>
+  <script src="{% static 'javascripts/oparupi.js' %}"></script>
 </body>
 </html>

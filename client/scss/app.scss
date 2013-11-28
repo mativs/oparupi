@@ -1,0 +1,152 @@
+@import "settings";
+
+$body-bg: #f5f5f5;
+$body-font-color: #34495e;
+$body-font-family: 'Open Sans', sans-serif;
+$header-font-family: "Open Sans", sans-serif;
+$header-font-color: #15B592;
+$paragraph-font-size: emCalc(15);
+$magellan-bg: #fff;
+$magellan-padding: 0px;
+$panel-bg: #fff; 
+$topbar-bg: #282828;
+$topbar-margin-bottom: 0;
+$topbar-link-weight: 600  ;
+$topbar-link-font-size: emCalc(15);
+
+@import "foundation";
+@import "isotope";
+@import "compass/css3";
+
+
+
+/**** Html/Body Configuration ****/
+html{
+  height: 100%;
+  body {
+    min-height: 100%;
+    border: 8px solid #ededed;
+    padding-top: 20px;
+  }
+}
+
+// Header CSS
+header {
+  text-align: center;
+  padding-top: 20px;
+  .description {
+    margin-top: 10px;
+  }
+  .last-post {
+    min-height: 150px;
+  }
+  article {
+    width: 100%;
+  }
+  h2 {
+    text-align: center;
+    margin-top: 30px;
+    letter-spacing: 4px;
+    font-size: emCalc(30);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  nav {
+    
+    ul {
+      position: relative;
+      list-style: none;
+      font-size: 11px;
+      li {
+        @include inline-block;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        margin-top: 5px;
+      }
+      & li a {
+        background: #ffffff;
+        display: block;
+        &.not-available.not-selected { display: none; }
+        
+      }
+      &.fiso-no-available.fiso-no-selected li a {
+        &.not-available.not-selected { 
+          display: block;
+        }
+      }
+      &[fiso-facet="sections"] li a {
+        margin: 0px 8px 0;
+        padding: 6px 12px;
+        color: #15B592;
+        &.selected { 
+          color: #fff; 
+          background: #15B592;
+        }
+      }
+      &[fiso-facet="tags"] li a {
+          margin: 0px 4px 0;
+          padding: 3px 6px;
+          font-size: emCalc(11);
+          color: #ffc541; 
+          &.selected {
+            color: #fff; 
+            background: #ffc541;
+          }
+      }
+    }
+  }
+}
+
+.tag {
+  color: #ffc541;
+  font-size: emCalc(11);
+}
+
+h1 {
+  .panel & {
+    color: #15B592;
+  }
+  text-align: center;
+  margin-top: 30px;
+  letter-spacing: 4px;
+  font-size: 38px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+
+article {
+  footer {
+    text-align: center;
+  }
+}
+
+footer {
+  color: #aaa;
+  text-align: center;
+  a {
+    color: #999;
+  }
+  small {
+    font-size: 70%;
+  }
+}
+
+.panel {
+  h4 {
+    color: #15B592;
+    a {
+      color: #15B592;
+      &:hover { color: #2ba6cb } 
+    }
+  }
+  .date {
+    text-align: right;
+  }
+}
+
+.start-hidden {
+  display: none;
+}
+

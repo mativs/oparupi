@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+gem 'foreman'
+gem 'compass'
+gem 'compass-recipes'
+gem 'foundation'
