@@ -77,8 +77,6 @@ def pushdata():
 @task
 def deploy():
     """ Deploy project to remote location """
-    package_clean('git')
-    package_update()
     git_ensure(env.project_path, env.git_uri, env.git_branch)
     package_ensure(env.project_dependencies)
     virtualenv_ensure(env.project_path, env.venv_path)
@@ -119,28 +117,6 @@ def deploy():
 
 def status():
     sudo("supervisorctl status %s" % env.project_name)
-
-@task
-def vagrant():
-    """ Set vagrant as host """
-    # change from the default user to 'vagrant'
-    env.user = 'vagrant'
-    # connect to the port-forwarded ssh
-    env.hosts = ['127.0.0.1:2222']
-    # vagrant project path
-    env.project_path = '/home/vagrant/oparupi'
-    # environment
-    env.environment = 'prod'
-    # set local domain
-    env.project_domain = '0.0.0.0:80'
-    # start vagrant
-    local("vagrant up")
-    # use vagrant ssh key
-    result = local('vagrant ssh-config | grep IdentityFile', capture=True)
-    env.key_filename = result.split()[1].strip('"')
-    # clean vagrant iso
-    
-    
 
 @task
 def prod():
