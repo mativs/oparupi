@@ -125,5 +125,5 @@ def prod():
     env.hosts = ['oparupi.com']
     env.project_path = '/home/mativs/oparupi'
     env.environment = 'prod'
-    env.project_domain = '*.oparupi.com'
+    env.project_domain = 'oparupi.com'
 
