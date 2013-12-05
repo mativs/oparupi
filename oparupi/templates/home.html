@@ -25,7 +25,7 @@
             <article category="{{section.title|slugify}}" class="start-hidden">
               <h3><a href='{% url "posts:detail" slug=section.latest.slug %}'>"{{ section.latest.title }}"</a></h3>
               
-              <i>{{ section.latest.body|markdown:"trusted"|truncatewords_html:20 }}</i>
+              <i>{{ section.latest.preview|markdown:"trusted"|truncatewords_html:20 }}</i>
             </article>
           {% endif %}
         {% endfor %}
@@ -62,7 +62,7 @@
               <img src="{{im.url}}">
             </div>
           {% endthumbnail %}{% endif %}
-          <p>{{ post.body|markdown:"trusted"|truncatewords_html:40 }}</p>
+          <p>{{ post.preview|markdown:"trusted"|truncatewords_html:40 }}</p>
           <div class="row">
             <div class="small-12 large-6 columns">
             {% for tag in post.tags.all %}
