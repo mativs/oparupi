@@ -32,10 +32,11 @@ class Post(models.Model):
     photo = ImageField(upload_to='photos', blank=True, null=True)
     section = models.ForeignKey(Section, related_name='posts')
     tags = TaggableManager(blank=True)
+    is_published = models.BooleanField(default=False)
 
     created = models.DateTimeField(auto_now_add=True)
-    created.editable = True
     updated = models.DateTimeField(auto_now=True)
+    published = models.DateField(default=None, blank=True, null=True)
 
     @property
     def preview(self):
