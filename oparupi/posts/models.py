@@ -13,7 +13,7 @@ class Section(models.Model):
         return self.title
 
     def latest(self):
-        return self.posts.latest('created')
+        return self.posts.filter(is_published=True).latest('created')
 
     
     title = models.CharField(max_length=50)
